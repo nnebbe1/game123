@@ -1,5 +1,8 @@
 # Importieren der Pygame-Bibliothek
 import pygame
+import Agent
+import Player
+import Environment
 # initialisieren von pygame
 pygame.init()
 
@@ -15,7 +18,7 @@ screen = pygame.display.set_mode((640, 480))
 
 # Titel für Fensterkopf
 pygame.display.set_caption("Maze Runners 2000 by Emily and Norman")
-icon = pygame.image.load("pics\dino.png")
+icon = pygame.image.load("data\pics\dino.png")
 pygame.display.set_icon(icon)
 
 # solange die Variable True ist, soll das Spiel laufen
