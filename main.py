@@ -3,6 +3,8 @@ import pygame
 import Agent
 import Player
 import Environment
+import helper
+import Brick
 # initialisieren von pygame
 pygame.init()
 
@@ -14,53 +16,49 @@ SCHWARZ = ( 0, 0, 0)
 WEISS   = ( 255, 255, 255)
 
 # Fenster öffnen
-screen = pygame.display.set_mode((640, 480))
+screen = pygame.display.set_mode((640, 640))
 
 # Titel für Fensterkopf
 pygame.display.set_caption("Maze Runners 2000 by Emily and Norman")
-icon = pygame.image.load("data\pics\dino.png")
+icon = pygame.image.load("data\pics\dino_right.png")
 pygame.display.set_icon(icon)
 
 # solange die Variable True ist, soll das Spiel laufen
-spielaktiv = True
+gameactive = True
 
 # Bildschirm Aktualisierungen einstellen
 clock = pygame.time.Clock()
 
+#create the player char
+player1 = Player.Player()
+
+#create the environment
+environment1 = Environment.Environment(1)
+
 # Schleife Hauptprogramm
-while spielaktiv:
+while gameactive:
+    keys = pygame.key.get_pressed()
     # Überprüfen, ob Nutzer eine Aktion durchgeführt hat
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            spielaktiv = False
-            print("Spieler hat Quit-Button angeklickt")
+            gameactive = False
+            print("Game closed")
         elif event.type == pygame.KEYDOWN:
-            print("Spieler hat Taste gedrückt")
 
-            # Taste für Spieler 1
-            if event.key == pygame.K_RIGHT:
-                print("Spieler hat Pfeiltaste rechts gedrückt")
-            elif event.key == pygame.K_LEFT:
-                print("Spieler hat Pfeiltaste links gedrückt")
-            elif event.key == pygame.K_UP:
-                print("Spieler hat Pfeiltaste hoch gedrückt")
-            elif event.key == pygame.K_DOWN:
-                print("Spieler hat Pfeiltaste runter gedrückt")
-            elif event.key == pygame.K_SPACE:
-                print("Spieler hat Leertaste gedrückt")
-
-            # Taste für Spieler 2
-            elif event.key == pygame.K_w:
-                print("Spieler hat Taste w gedrückt")
-            elif event.key == pygame.K_a:
-                print("Spieler hat Taste a gedrückt")
+            #W and S keys for player, single jump event
+            if event.key == pygame.K_w:
+                player1.jump()
             elif event.key == pygame.K_s:
-                print("Spieler hat Taste s gedrückt")
-            elif event.key == pygame.K_d:
-                print("Spieler hat Taste d gedrückt")
-
+                player1.fall()
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            print("Spieler hast Maus angeklickt")
+            print("mousebutton")
+    #A and D keys for player, continuous walking
+    if keys[pygame.K_a]:
+        player1.walk_left()
+        player1.icon = pygame.image.load("data\pics\dino_left.png")  
+    if keys[pygame.K_d]:
+        player1.walk_right()
+        player1.icon = pygame.image.load("data\pics\dino_right.png")  
 
     # Spiellogik hier integrieren
 
@@ -68,7 +66,9 @@ while spielaktiv:
     screen.fill(WEISS)
 
     # Spielfeld/figuren zeichnen
-
+    screen.blit(player1.icon, (player1.xPos, player1.yPos))
+    for brick in environment1.bricks:
+        screen.blit(brick.icon, (brick.xPos, brick.yPos))
     # Fenster aktualisieren
     pygame.display.flip()
 
