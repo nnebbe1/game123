@@ -4,7 +4,7 @@ import Agent
 import Player
 import Environment
 import helper
-import Brick
+import Platform
 import random
 from helper import *
 
@@ -26,11 +26,10 @@ gameactive = True
 # Bildschirm Aktualisierungen einstellen
 clock = pygame.time.Clock()
 
-#create the player char
-player1 = Player.Player()
 
 #create the environment
 environment1 = Environment.Environment(1)
+
 
 # Schleife Hauptprogramm
 while gameactive:
@@ -44,9 +43,10 @@ while gameactive:
 
             #W and S keys for player, single jump event
             if event.key == pygame.K_w:
-                player1.jump()
+                environment1.player.jump()
             elif event.key == pygame.K_s:
-                player1.fall()
+                None
+                #environment1.player.fall()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             print("mousebutton")
 
@@ -54,10 +54,10 @@ while gameactive:
     screen.fill(WHITE)
 
     # Spielfeld/figuren zeichnen
-    player1.update()
-    screen.blit(player1.icon, player1.pos)
-    for brick in environment1.bricks:
-        screen.blit(brick.icon, (brick.xPos, brick.yPos))
+    environment1.update()
+    screen.blit(environment1.player.icon, environment1.player.rect.midbottom)
+    for platform in environment1.platforms:
+        screen.blit(platform.image, (platform.rect.x, platform.rect.y+30))
     # Fenster aktualisieren
     pygame.display.flip()
 

@@ -4,9 +4,9 @@ from helper import *
 vec = pg.math.Vector2
 
 class Player(pg.sprite.Sprite):
-    def __init__(self) -> None:
+    def __init__(self, environment) -> None:
         pg.sprite.Sprite.__init__(self)
-        
+        self.environment = environment
         self.icon = pg.image.load("data\pics\dino_right.png")
         self.rect = self.icon.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT /2)
@@ -14,10 +14,18 @@ class Player(pg.sprite.Sprite):
         self.vel = vec(0,0)
         self.acc = vec(0,0)
 
+    def jump(self):
+        self.rect.y += 1
+        hits = pg.sprite.spritecollide(self, self.environment.platforms, False)
+        self.rect.y -= 1 
+        if hits:
+            self.vel.y = -10
+
+
     def update(self):
 
         #acceleration left and right when key press
-        self.acc = vec(0,0.1)
+        self.acc = vec(0,0.2)
         keys = pg.key.get_pressed()
         if keys[pg.K_a]:
             self.icon = pg.image.load("data\pics\dino_left.png") 
@@ -37,4 +45,4 @@ class Player(pg.sprite.Sprite):
         if self.pos.x < 0:
             self.pos.x = WIDTH
 
-        self.rect.center = self.pos
+        self.rect.midbottom = self.pos
