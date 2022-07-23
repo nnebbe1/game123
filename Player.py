@@ -20,7 +20,8 @@ class Player(pg.sprite.Sprite):
         hits = pg.sprite.spritecollide(self, self.environment.platforms, False)
         self.rect.y -= 1 
         if hits:
-            self.vel.y = -8
+            self.vel.y = -PLAYER_JUMP
+    
 
 
     def update(self):

@@ -20,6 +20,7 @@ pygame.display.set_caption(TITEL)
 icon = pygame.image.load("data\pics\dino_right.png")
 pygame.display.set_icon(icon)
 
+
 #Game is running as long as is true
 gameactive = True
 
@@ -52,6 +53,15 @@ while gameactive:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             print("mousebutton")
 
+    #Game over condition
+    if environment1.player.pos.y > HEIGHT +50:
+        for sprite in environment1.all_sprites:
+            sprite.rect.y -= max(environment1.player.vel.y, 10)
+            if sprite.rect.bottom < 0:
+                sprite.kill()
+            if len(environment1.platforms) == 0:
+                gameactive = False
+
     # Spielfeld löschen
     screen.fill(WHITE)
 
@@ -59,6 +69,8 @@ while gameactive:
     environment1.update()
 
     environment1.all_sprites.draw(screen)
+
+    draw_text(screen, str(environment1.score), 20, BLACK, WIDTH * (5 / 6), 15)
 
     #screen.blit(environment1.player.icon, environment1.player.rect.midbottom)
     #for platform in environment1.platforms:
@@ -68,5 +80,7 @@ while gameactive:
 
     # Refresh-Zeiten festlegen
     clock.tick(60)
+
+        
 
 pygame.quit()

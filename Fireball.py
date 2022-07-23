@@ -10,11 +10,13 @@ class Fireball(pg.sprite.Sprite):
         self.image = pg.Surface((10,10))
         self.image.fill(ORANGE)
         self.rect = self.image.get_rect()
-        self.pos = vec(self.player.pos.x + 20, self.player.pos.y-20)
+        
         if player.looking_dir == "right":
             self.vel = vec(5,-1)
+            self.pos = vec(self.player.pos.x + 20, self.player.pos.y-15)
         elif player.looking_dir == "left":
             self.vel = vec(-5,-1)
+            self.pos = vec(self.player.pos.x - 20, self.player.pos.y-15)
 
     def update(self):
         if self.vel.x > 0:
