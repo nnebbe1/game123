@@ -47,6 +47,8 @@ while gameactive:
             elif event.key == pygame.K_s:
                 None
                 #environment1.player.fall()
+            elif event.key == pygame.K_SPACE:
+                environment1.player_shoot()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             print("mousebutton")
 
@@ -55,9 +57,12 @@ while gameactive:
 
     # Spielfeld/figuren zeichnen
     environment1.update()
-    screen.blit(environment1.player.icon, environment1.player.rect.midbottom)
-    for platform in environment1.platforms:
-        screen.blit(platform.image, (platform.rect.x, platform.rect.y+30))
+
+    environment1.all_sprites.draw(screen)
+
+    #screen.blit(environment1.player.icon, environment1.player.rect.midbottom)
+    #for platform in environment1.platforms:
+    #    screen.blit(platform.image, (platform.rect.x, platform.rect.y))
     # Fenster aktualisieren
     pygame.display.flip()
 

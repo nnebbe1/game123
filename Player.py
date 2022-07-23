@@ -7,9 +7,10 @@ class Player(pg.sprite.Sprite):
     def __init__(self, environment) -> None:
         pg.sprite.Sprite.__init__(self)
         self.environment = environment
-        self.icon = pg.image.load("data\pics\dino_right.png")
-        self.rect = self.icon.get_rect()
-        self.rect.center = (WIDTH / 2, HEIGHT /2)
+        self.image = pg.image.load("data\pics\dino_right.png")
+        self.rect = self.image.get_rect()
+        self.rect.midbottom = (WIDTH / 2, HEIGHT /2)
+        self.looking_dir = "right"
         self.pos = vec(WIDTH / 2, HEIGHT / 2)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
@@ -19,7 +20,7 @@ class Player(pg.sprite.Sprite):
         hits = pg.sprite.spritecollide(self, self.environment.platforms, False)
         self.rect.y -= 1 
         if hits:
-            self.vel.y = -10
+            self.vel.y = -8
 
 
     def update(self):
@@ -28,10 +29,12 @@ class Player(pg.sprite.Sprite):
         self.acc = vec(0,0.2)
         keys = pg.key.get_pressed()
         if keys[pg.K_a]:
-            self.icon = pg.image.load("data\pics\dino_left.png") 
+            self.image = pg.image.load("data\pics\dino_left.png") 
+            self.looking_dir = "left"
             self.acc.x = -0.5
         if keys[pg.K_d]:
-            self.icon = pg.image.load("data\pics\dino_right.png") 
+            self.image = pg.image.load("data\pics\dino_right.png") 
+            self.looking_dir = "right"
             self.acc.x = 0.5
         
         # motion with friction
