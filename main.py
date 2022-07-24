@@ -7,6 +7,7 @@ import helper
 import Platform
 import random
 from helper import *
+import time
 
 
 # initialisieren von pygame
@@ -31,6 +32,8 @@ clock = pygame.time.Clock()
 #create the environment
 environment1 = Environment.Environment(1)
 
+#show start screen
+start_screen(screen)
 
 # Schleife Hauptprogramm
 while gameactive:
@@ -59,22 +62,23 @@ while gameactive:
             sprite.rect.y -= max(environment1.player.vel.y, 10)
             if sprite.rect.bottom < 0:
                 sprite.kill()
-            if len(environment1.platforms) == 0:
+            if len(environment1.solid_platforms) == 0:
+                end_screen(screen, environment1.score)
+                time.sleep(2)
                 gameactive = False
+                
+                
 
     # Spielfeld löschen
-    screen.fill(WHITE)
+    screen.fill(LIGHTBLUE)
 
     # Spielfeld/figuren zeichnen
     environment1.update()
 
     environment1.all_sprites.draw(screen)
 
-    draw_text(screen, str(environment1.score), 20, BLACK, WIDTH * (5 / 6), 15)
+    draw_text_on_screen(screen, str(environment1.score), 20, BLACK, WIDTH * (5 / 6), 15)
 
-    #screen.blit(environment1.player.icon, environment1.player.rect.midbottom)
-    #for platform in environment1.platforms:
-    #    screen.blit(platform.image, (platform.rect.x, platform.rect.y))
     # Fenster aktualisieren
     pygame.display.flip()
 

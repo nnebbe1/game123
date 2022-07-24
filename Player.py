@@ -9,15 +9,15 @@ class Player(pg.sprite.Sprite):
         self.environment = environment
         self.image = pg.image.load("data\pics\dino_right.png")
         self.rect = self.image.get_rect()
-        self.rect.midbottom = (WIDTH / 2, HEIGHT /2)
+        self.rect.midbottom = (WIDTH / 2, HEIGHT-40)
         self.looking_dir = "right"
-        self.pos = vec(WIDTH / 2, HEIGHT / 2)
+        self.pos = vec(WIDTH / 2, HEIGHT-40)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
 
     def jump(self):
         self.rect.y += 1
-        hits = pg.sprite.spritecollide(self, self.environment.platforms, False)
+        hits = pg.sprite.spritecollide(self, self.environment.all_platforms, False)
         self.rect.y -= 1 
         if hits:
             self.vel.y = -PLAYER_JUMP

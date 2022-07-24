@@ -7,8 +7,9 @@ class Fireball(pg.sprite.Sprite):
     def __init__(self, player) -> None:
         pg.sprite.Sprite.__init__(self)
         self.player = player
-        self.image = pg.Surface((10,10))
-        self.image.fill(ORANGE)
+        self.image = pg.Surface((14,14))
+        self.image.fill(LIGHTBLUE)
+        pg.draw.circle(self.image, ORANGE, (7,7), 7)
         self.rect = self.image.get_rect()
         
         if player.looking_dir == "right":
