@@ -1,5 +1,6 @@
 # Importieren der Pygame-Bibliothek
 import pygame
+import os
 import Agent
 import Player
 import Environment
@@ -16,12 +17,19 @@ SCHWARZ = ( 0, 0, 0)
 WEISS   = ( 255, 255, 255)
 
 # Fenster öffnen
-screen = pygame.display.set_mode((640, 640))
+HEIGHT = 640
+WIDTH = 640 
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # Titel für Fensterkopf
 pygame.display.set_caption("Maze Runners 2000 by Emily and Norman")
 icon = pygame.image.load("data\pics\dino_right.png")
 pygame.display.set_icon(icon)
+
+
+#directories in which the game and the images are located 
+game_dir = os.path.dirname(__file__)
+img_dir = os.path.join(game_dir, 'images')
 
 # solange die Variable True ist, soll das Spiel laufen
 gameactive = True
@@ -61,6 +69,13 @@ while gameactive:
         player1.icon = pygame.image.load("data\pics\dino_right.png")  
 
     # Spiellogik hier integrieren
+    
+    #falls ein enemy den player hittet:
+    hits = pygame.sprite.spritecollide(player, enemies, False)
+    if hits:
+        gameactive = False
+        
+    
 
     # Spielfeld löschen
     screen.fill(WEISS)
@@ -74,5 +89,8 @@ while gameactive:
 
     # Refresh-Zeiten festlegen
     clock.tick(60)
+    
+    
+
 
 pygame.quit()
