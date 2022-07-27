@@ -1,4 +1,6 @@
 # Importieren der Pygame-Bibliothek
+from asyncore import write
+from lib2to3.pgen2.token import NEWLINE
 import pygame
 from prompt_toolkit import prompt
 
@@ -14,9 +16,14 @@ import csv
 from tkinter import *
 from tkinter import ttk
 
-
-
-
+def button_click():
+    scoreboard_file = open("data\scoreboard.csv", "a", newline="")  
+    writer = csv.writer(scoreboard_file)
+    user_name_input = entry_field.get()
+    writer.writerow(user_name_input + ",")
+    scoreboard_file.close()
+    root.destroy()
+    return
 
 # initialisieren von pygame
 pygame.init()
@@ -93,11 +100,15 @@ while gameactive:
     # Refresh-Zeiten festlegen
     clock.tick(60)
 
-# open csv file and write name
-with open("data\scoreboard.csv", "a") as csv_file:
-    writer = csv.writer(csv_file)
-
-user_name_input()    
+    
+root = Tk()
+lable = ttk.Label( text="Write your name to put it on the scoreboard!")
+lable.pack()
+entry_field = Entry(root, width=30)
+entry_field.pack()
+done_button = ttk.Button(root, text="Done", command=button_click)
+done_button.pack()
+root.mainloop()
 
 pygame.quit()
 

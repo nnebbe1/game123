@@ -28,6 +28,7 @@ LIGHTBLUE = (0, 220, 220)
 PLAYER_ACC = 0.4
 PLAYER_FRICTION = -0.12
 PLAYER_JUMP = 9
+PLAYER_NAME = ""
 
 PLATFORM_LIST1 = [(0,HEIGHT-40, WIDTH,50, "solid"),
                     (WIDTH / 2 - 50, HEIGHT * 5/6, 100, 10, "solid"),
@@ -81,16 +82,22 @@ def end_screen(screen, score):
     draw_text_on_screen(screen, "Oh no you died! You're score is {}".format(score) , 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.5 )
     draw_text_on_screen(screen,  "Better Luck next time!", 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.6 )
     pg.display.flip()
+
+def button_click(root, entry_field):
+    PLAYER_NAME = entry_field.get()
+    print(PLAYER_NAME)
+    root.destroy()
     
 def user_name_input()->str:
-    user_name = ""
     root = Tk()
     lable = ttk.Label( text="Write your name to put it on the scoreboard!")
     lable.pack()
     entry_field = Entry(root, width=30)
     entry_field.pack()
-    user_name = entry_field.get()
-    done_button = ttk.Button(root, text="Done", command=root.destroy)
+    #user_name = entry_field.get()
+    #print(user_name)
+    done_button = ttk.Button(root, text="Done", command=button_click(root, entry_field))
     done_button.pack()
     root.mainloop()
+
     return user_name
