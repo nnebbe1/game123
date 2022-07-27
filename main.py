@@ -1,6 +1,7 @@
 # Importieren der Pygame-Bibliothek
 from asyncore import write
 from lib2to3.pgen2.token import NEWLINE
+from pydoc import pipepager
 import pygame
 from prompt_toolkit import prompt
 
@@ -16,11 +17,13 @@ import csv
 from tkinter import *
 from tkinter import ttk
 
+
+
 def button_click():
     scoreboard_file = open("data\scoreboard.csv", "a", newline="")  
     writer = csv.writer(scoreboard_file)
     user_name_input = entry_field.get()
-    writer.writerow(user_name_input + ",")
+    writer.writerow(str(user_name_input))
     scoreboard_file.close()
     root.destroy()
     return
