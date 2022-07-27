@@ -1,5 +1,7 @@
 # Importieren der Pygame-Bibliothek
 import pygame
+from prompt_toolkit import prompt
+
 import Agent
 import Player
 import Environment
@@ -8,6 +10,12 @@ import Platform
 import random
 from helper import *
 import time
+import csv
+from tkinter import *
+from tkinter import ttk
+
+
+
 
 
 # initialisieren von pygame
@@ -85,6 +93,11 @@ while gameactive:
     # Refresh-Zeiten festlegen
     clock.tick(60)
 
-        
+# open csv file and write name
+with open("data\scoreboard.csv", "a") as csv_file:
+    writer = csv.writer(csv_file)
+
+user_name_input()    
 
 pygame.quit()
+

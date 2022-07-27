@@ -1,6 +1,11 @@
 # game settings
+from turtle import done
 import pygame as pg
 import time
+import csv
+from tkinter import *
+from tkinter import ttk
+
 vec = pg.math.Vector2
 
 TITEL = "Dino's path to victory"
@@ -77,3 +82,15 @@ def end_screen(screen, score):
     draw_text_on_screen(screen,  "Better Luck next time!", 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.6 )
     pg.display.flip()
     
+def user_name_input()->str:
+    user_name = ""
+    root = Tk()
+    lable = ttk.Label( text="Write your name to put it on the scoreboard!")
+    lable.pack()
+    entry_field = Entry(root, width=30)
+    entry_field.pack()
+    user_name = entry_field.get()
+    done_button = ttk.Button(root, text="Done", command=root.destroy)
+    done_button.pack()
+    root.mainloop()
+    return user_name

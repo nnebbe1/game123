@@ -45,11 +45,18 @@ class Environment:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
 
-        if self.player.vel.y > 0:
-            hits = pg.sprite.spritecollide(self.player, self.not_solid_platforms, True)
+        if self.player.vel.y < 0:
+            hits = pg.sprite.spritecollide(self.player, self.solid_platforms, False)
             if hits:
-                self.player.pos.y = hits[0].rect.top
-                self.player.vel.y = -9
+                self.player.pos.y += 10
+                self.player.vel.y = 0
+
+
+    #   if self.player.vel.y > 0:
+    #      hits = pg.sprite.spritecollide(self.player, self.not_solid_platforms, True)
+      #      if hits:
+       #         self.player.pos.y = hits[0].rect.top
+       #         self.player.vel.y = -9
         
         # if player reaches top of screen, move "screen"
         if self.player.rect.top <= HEIGHT / 4:
