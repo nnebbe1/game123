@@ -16,6 +16,7 @@ pygame.init()
 # Fenster öffnen
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
+
 # Titel für Fensterkopf
 pygame.display.set_caption(TITEL)
 icon = pygame.image.load("data\images\dino_right.png")
