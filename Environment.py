@@ -41,15 +41,19 @@ class Environment:
         #check if player hits a platform - only when falling
         if self.player.vel.y > 0:
             hits = pg.sprite.spritecollide(self.player, self.solid_platforms, False)
+            # check the 4 possible collisions
             if hits:
-                self.player.pos.y = hits[0].rect.top
-                self.player.vel.y = 0
+                    self.player.pos.y = hits[0].rect.top
+                    self.player.vel.y = 0
+         
+                
 
         if self.player.vel.y < 0:
             hits = pg.sprite.spritecollide(self.player, self.solid_platforms, False)
             if hits:
-                self.player.pos.y += 10
+                self.player.pos.y += 3
                 self.player.vel.y = 0
+
 
 
     #   if self.player.vel.y > 0:
@@ -65,29 +69,7 @@ class Environment:
                 plat.rect.y += abs(self.player.vel.y)
                 if plat.rect.top >= HEIGHT:
                     plat.kill()
-                    self.score += 10
 
-        #spawn new platforms if old ones get deleted
-        while len(self.solid_platforms) < 6:
-            random_nr = random.randrange(1, 10)
-            if random_nr > 2:
-                solidity_state = "solid"
-                width = random.randrange(50, 100)
-                p = Platform.Platform(random.randrange(0, WIDTH-width),
-                                    -10,width, 10, solidity_state)
-            elif random_nr <= 2:
-                solidity_state = "not_solid"
-                width = random.randrange(50, 100)
-                p = Platform.Platform(random.randrange(0, WIDTH-width),
-                                    -30,width, 10, solidity_state)
-
-            
-            if solidity_state == "solid":
-                self.solid_platforms.add(p)
-            else:
-                self.not_solid_platforms.add(p)
-            self.all_platforms.add(p)
-            self.all_sprites.add(p)
 
         
 

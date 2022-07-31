@@ -11,9 +11,10 @@ class Player(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.midbottom = (WIDTH / 2, HEIGHT-40)
         self.looking_dir = "right"
-        self.pos = vec(WIDTH / 2, HEIGHT-40)
+        self.pos = vec(100, 100)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
+        self.climbing = False
 
     def jump(self):
         self.rect.y += 1
@@ -25,9 +26,10 @@ class Player(pg.sprite.Sprite):
 
 
     def update(self):
+        #gravity
+        self.acc = vec(0,0.2)
 
         #acceleration left and right when key press
-        self.acc = vec(0,0.2)
         keys = pg.key.get_pressed()
         if keys[pg.K_a]:
             self.image = pg.image.load("data\pics\dino_left.png") 

@@ -9,8 +9,8 @@ from tkinter import ttk
 vec = pg.math.Vector2
 
 TITEL = "Dino's path to victory"
-WIDTH = 480
-HEIGHT = 600
+WIDTH = 1200
+HEIGHT = 700
 FPS = 60
 FONT_NAME = 'arial'
 
@@ -27,15 +27,18 @@ LIGHTBLUE = (0, 220, 220)
 #player attributes
 PLAYER_ACC = 0.4
 PLAYER_FRICTION = -0.12
-PLAYER_JUMP = 9
+PLAYER_JUMP = 6
 PLAYER_NAME = ""
 
 PLATFORM_LIST1 = [(0,HEIGHT-40, WIDTH,50, "solid"),
-                    (WIDTH / 2 - 50, HEIGHT * 5/6, 100, 10, "solid"),
-                    (125, HEIGHT * 4 / 6, 100, 10, "solid"),
-                    (350, HEIGHT * 3 / 6, 100, 10, "solid"),
-                    (175, HEIGHT * 2 / 6, 50, 10, "solid"),
-                    (175, HEIGHT * 1 / 6, 50, 10, "solid")]
+                    (0,HEIGHT-50, WIDTH-50,50, "solid"),
+                    (0,HEIGHT-100, WIDTH-100,50, "solid"),
+                    (0,HEIGHT-150, WIDTH-150,50, "solid"),
+                    (WIDTH / 2 - 50, HEIGHT * 5/6, 100, 40, "solid"),
+                    (125, HEIGHT * 4 / 6, 100, 40, "solid"),
+                    (350, HEIGHT * 3 / 6, 100, 40, "solid"),
+                    (175, HEIGHT * 2 / 6, 50, 40, "solid"),
+                    (175, HEIGHT * 1 / 6, 50, 40, "solid")]
 
 def draw_text_on_screen(screen, text, size, color, x, y):
     font = pg.font.Font(font_name, size)

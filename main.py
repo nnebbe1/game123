@@ -2,6 +2,7 @@
 from asyncore import write
 from lib2to3.pgen2.token import NEWLINE
 from pydoc import pipepager
+from unicodedata import name
 import pygame
 from prompt_toolkit import prompt
 
@@ -22,8 +23,8 @@ from tkinter import ttk
 def button_click():
     scoreboard_file = open("data\scoreboard.csv", "a", newline="")  
     writer = csv.writer(scoreboard_file)
-    user_name_input = entry_field.get()
-    writer.writerow(str(user_name_input))
+    user_name_input = str(entry_field.get())
+    writer.writerow([user_name_input])
     scoreboard_file.close()
     root.destroy()
     return
@@ -105,6 +106,7 @@ while gameactive:
 
     
 root = Tk()
+root.wm_title("Dino's path to victory")
 lable = ttk.Label( text="Write your name to put it on the scoreboard!")
 lable.pack()
 entry_field = Entry(root, width=30)
