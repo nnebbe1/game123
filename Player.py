@@ -27,12 +27,34 @@ class Player(pg.sprite.Sprite):
         #acceleration left and right when key press
         self.acc = vec(0,0.2)
         keys = pg.key.get_pressed()
+<<<<<<< Updated upstream
         if keys[pg.K_a]:
             self.icon = pg.image.load("data\pics\dino_left.png") 
             self.acc.x = -0.5
         if keys[pg.K_d]:
             self.icon = pg.image.load("data\pics\dino_right.png") 
             self.acc.x = 0.5
+=======
+        if self.wasd_or_arrow_keys == "wasd":
+            if keys[pg.K_a]:
+                self.image = pg.image.load("data\images\dino_left.png") 
+                self.looking_dir = "left"
+                self.acc.x = -0.5
+            if keys[pg.K_d]:
+                self.image = pg.image.load("data\images\dino_right.png") 
+                self.looking_dir = "right"
+                self.acc.x = 0.5
+        elif self.wasd_or_arrow_keys == "arrow":
+            if keys[pg.K_LEFT]:
+                self.image = pg.image.load("data\images\dino_left.png") 
+                self.looking_dir = "left"
+                self.acc.x = -0.5
+            if keys[pg.K_RIGHT]:
+                self.image = pg.image.load("data\images\dino_right.png") 
+                self.looking_dir = "right"
+                self.acc.x = 0.5
+
+>>>>>>> Stashed changes
         
         # motion with friction
         self.acc.x += self.vel.x * PLAYER_FRICTION

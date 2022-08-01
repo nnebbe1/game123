@@ -59,7 +59,7 @@ while gameactive:
     for platform in environment1.platforms:
         screen.blit(platform.image, (platform.rect.x, platform.rect.y+30))
     # Fenster aktualisieren
-    pygame.display.flip()
+    pg.display.flip()
 
     # Refresh-Zeiten festlegen
     clock.tick(60)
