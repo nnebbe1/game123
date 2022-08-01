@@ -1,9 +1,20 @@
 # game settings
 
+
+import pygame as pg
+import time
+import csv
+from tkinter import *
+from tkinter import ttk
+
+vec = pg.math.Vector2
+
 TITEL = "Dino's path to victory"
-WIDTH = 480
-HEIGHT = 600
+WIDTH = 1200
+HEIGHT = 800
 FPS = 60
+FONT_NAME = 'arial'
+font_name = pg.font.match_font(FONT_NAME)
 
 ORANGE  = ( 255, 140, 0)
 RED     = ( 255, 0, 0)
@@ -11,12 +22,11 @@ GREEN   = ( 0, 255, 0)
 BLACK   = ( 0, 0, 0)
 WHITE   = ( 255, 255, 255)
 BROWN   = ( 200, 100, 100)
+LIGHTBLUE = (0, 220, 220)
 
 #player attributes
 PLAYER_ACC = 0.4
 PLAYER_FRICTION = -0.12
-<<<<<<< Updated upstream
-=======
 PLAYER_JUMP = 6
 PLAYER_NAME = ""
 
@@ -50,7 +60,7 @@ def start_screen(screen)->str:
         draw_text_on_screen(screen,  "Shoot Fireballs with SPACE", 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.6 )
         draw_text_on_screen(screen, "Press W or ARROW UP to choose control schema", 21, BLACK, WIDTH*0.75, HEIGHT*0.75)
 
-        dino_image = pg.image.load("data\images\dino_right.png")
+        dino_image = pg.image.load("data\pics\dino_right.png")
         dino_image_rect = dino_image.get_rect()
         screen.blit(dino_image, dino_pos)
        
@@ -99,10 +109,5 @@ def user_name_input()->str:
     done_button = ttk.Button(root, text="Done", command=button_click(root, entry_field))
     done_button.pack()
     root.mainloop()
->>>>>>> Stashed changes
 
-PLATFORM_LIST1 = [(0,HEIGHT-40, WIDTH,50),
-                    (WIDTH / 2 - 50, HEIGHT * 3/4, 100, 20),
-                    (125, HEIGHT -350, 100, 20),
-                    (350, 200, 100, 20),
-                    (175, 100, 50, 20)]
+    return user_name
