@@ -3,10 +3,9 @@ from asyncore import write
 from lib2to3.pgen2.token import NEWLINE
 from pydoc import pipepager
 from unicodedata import name
-import pygame
-from prompt_toolkit import prompt
+import pygame as pg
 
-import Agent
+import Enemy
 import Player
 import Environment
 import helper
@@ -30,22 +29,23 @@ def button_click():
     return
 
 # initialisieren von pygame
-pygame.init()
+pg.init()
 
 # Fenster öffnen
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen = pg.display.set_mode((WIDTH, HEIGHT))
+
 
 # Titel für Fensterkopf
-pygame.display.set_caption(TITEL)
-icon = pygame.image.load("data\pics\dino_right.png")
-pygame.display.set_icon(icon)
+pg.display.set_caption(TITEL)
+icon = pg.image.load("data\images\dino_right.png")
+pg.display.set_icon(icon)
 
 
 #Game is running as long as is true
 gameactive = True
 
 # Bildschirm Aktualisierungen einstellen
-clock = pygame.time.Clock()
+clock = pg.time.Clock()
 
 #show start screen
 wasd_or_arrow_keys =""
@@ -56,24 +56,28 @@ environment1 = Environment.Environment(1, wasd_or_arrow_keys)
 
 
 
+
+#show start screen
+start_screen(screen)
+
 # Schleife Hauptprogramm
 while gameactive:
-    keys = pygame.key.get_pressed()
+    keys = pg.key.get_pressed()
     # Überprüfen, ob Nutzer eine Aktion durchgeführt hat
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
             gameactive = False
             print("Game closed")
-        elif event.type == pygame.KEYDOWN:
+        elif event.type == pg.KEYDOWN:
 
             #W / ARROW UP keys for player, single jump event
-            if event.key == pygame.K_w and wasd_or_arrow_keys == "wasd":
+            if event.key == pg.K_w and wasd_or_arrow_keys == "wasd":
                 environment1.player.jump()
-            if event.key == pygame.K_UP and wasd_or_arrow_keys == "arrow":
+            if event.key == pg.K_UP and wasd_or_arrow_keys == "arrow":
                 environment1.player.jump()
-            elif event.key == pygame.K_SPACE:
+            elif event.key == pg.K_SPACE:
                 environment1.player_shoot()
-        elif event.type == pygame.MOUSEBUTTONDOWN:
+        elif event.type == pg.MOUSEBUTTONDOWN:
             print("mousebutton")
 
     #Game over condition
@@ -86,7 +90,6 @@ while gameactive:
                 end_screen(screen, environment1.score)
                 time.sleep(2)
                 gameactive = False
-                
                 
 
     # Spielfeld löschen
@@ -116,5 +119,5 @@ done_button = ttk.Button(root, text="Done", command=button_click)
 done_button.pack()
 root.mainloop()
 
-pygame.quit()
+pg.quit()
 

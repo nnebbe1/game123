@@ -4,15 +4,16 @@ from helper import *
 vec = pg.math.Vector2
 
 class Player(pg.sprite.Sprite):
+    
     def __init__(self, environment,wasd_or_arrow_keys) -> None:
         pg.sprite.Sprite.__init__(self)
         self.environment = environment
         self.wasd_or_arrow_keys = wasd_or_arrow_keys
-        self.image = pg.image.load("data\pics\dino_right.png")
+        self.image = pg.image.load("data\images\dino_right.png")
         self.rect = self.image.get_rect()
         self.rect.midbottom = (WIDTH / 2, HEIGHT-40)
         self.looking_dir = "right"
-        self.pos = vec(100, 100)
+        self.pos = vec(WIDTH / 2, HEIGHT-40)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
         self.climbing = False
@@ -64,3 +65,6 @@ class Player(pg.sprite.Sprite):
             self.pos.x = WIDTH
 
         self.rect.midbottom = self.pos
+        
+    def get_pos(self):
+        return self.pos

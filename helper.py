@@ -1,5 +1,6 @@
 # game settings
-from turtle import done
+
+
 import pygame as pg
 import time
 import csv
@@ -13,7 +14,6 @@ WIDTH = 1200
 HEIGHT = 800
 FPS = 60
 FONT_NAME = 'arial'
-
 font_name = pg.font.match_font(FONT_NAME)
 
 ORANGE  = ( 255, 140, 0)
@@ -105,8 +105,7 @@ def user_name_input()->str:
     lable.pack()
     entry_field = Entry(root, width=30)
     entry_field.pack()
-    #user_name = entry_field.get()
-    #print(user_name)
+    user_name = entry_field.get()
     done_button = ttk.Button(root, text="Done", command=button_click(root, entry_field))
     done_button.pack()
     root.mainloop()
