@@ -10,7 +10,7 @@ vec = pg.math.Vector2
 
 TITEL = "Dino's path to victory"
 WIDTH = 1200
-HEIGHT = 700
+HEIGHT = 800
 FPS = 60
 FONT_NAME = 'arial'
 
@@ -73,16 +73,19 @@ def start_screen(screen)->str:
         pg.display.flip()
 
         for event in pg.event.get():
-            if event.type == pg.K_w:
-                no_key = False
-                wasd_or_arrow_keys = "wasd"
-            if event.type == pg.K_UP:
-                no_key = False
-                wasd_or_arrow_keys = "arrow"
-            if event.type == pg.QUIT:
-                print("dafuq")
-                pg.quit()
-                #return None
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_w:
+                    wasd_or_arrow_keys = "wasd"
+                    no_key = False 
+                    print("wasd")
+                if event.key == pg.K_UP:
+                    wasd_or_arrow_keys = "arrow"
+                    no_key = False
+                    print("arrow")
+                if event.type == pg.QUIT:
+                    print("dafuq")
+                    pg.quit()
+                    #return None
     return wasd_or_arrow_keys
 
 def end_screen(screen, score):

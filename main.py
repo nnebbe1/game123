@@ -52,7 +52,7 @@ wasd_or_arrow_keys =""
 wasd_or_arrow_keys = start_screen(screen)
 
 #create the environment
-environment1 = Environment.Environment(1)
+environment1 = Environment.Environment(1, wasd_or_arrow_keys)
 
 
 

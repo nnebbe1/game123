@@ -20,7 +20,7 @@ class Environment:
         self.solid_platforms = pg.sprite.Group()
         self.not_solid_platforms = pg.sprite.Group()
         self.fireballs = pg.sprite.Group()
-        self.player = Player.Player(self)
+        self.player = Player.Player(self, wasd_or_arrow_keys)
         self.all_sprites.add(self.player)
         self.score = 0
 
