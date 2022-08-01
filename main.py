@@ -1,47 +1,41 @@
 # Importieren der Pygame-Bibliothek
 import pygame
-import os
-import Agent
+import Enemy
 import Player
 import Environment
 import helper
-import Brick
+import Platform
+import random
+from helper import *
+import time
+
+
 # initialisieren von pygame
 pygame.init()
 
-# genutzte Farbe
-ORANGE  = ( 255, 140, 0)
-ROT     = ( 255, 0, 0)
-GRUEN   = ( 0, 255, 0)
-SCHWARZ = ( 0, 0, 0)
-WEISS   = ( 255, 255, 255)
-
 # Fenster öffnen
-HEIGHT = 640
-WIDTH = 640 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
+
 # Titel für Fensterkopf
-pygame.display.set_caption("Maze Runners 2000 by Emily and Norman")
-icon = pygame.image.load("data\pics\dino_right.png")
+pygame.display.set_caption(TITEL)
+icon = pygame.image.load("data\images\dino_right.png")
 pygame.display.set_icon(icon)
 
 
-#directories in which the game and the images are located 
-game_dir = os.path.dirname(__file__)
-img_dir = os.path.join(game_dir, 'images')
-
-# solange die Variable True ist, soll das Spiel laufen
+#Game is running as long as is true
 gameactive = True
 
 # Bildschirm Aktualisierungen einstellen
 clock = pygame.time.Clock()
 
-#create the player char
-player1 = Player.Player()
 
 #create the environment
 environment1 = Environment.Environment(1)
+
+
+#show start screen
+start_screen(screen)
 
 # Schleife Hauptprogramm
 while gameactive:
@@ -55,42 +49,46 @@ while gameactive:
 
             #W and S keys for player, single jump event
             if event.key == pygame.K_w:
-                player1.jump()
+                environment1.player.jump()
             elif event.key == pygame.K_s:
-                player1.fall()
+                None
+                #environment1.player.fall()
+            elif event.key == pygame.K_SPACE:
+                environment1.player_shoot()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             print("mousebutton")
-    #A and D keys for player, continuous walking
-    if keys[pygame.K_a]:
-        player1.walk_left()
-        player1.icon = pygame.image.load("data\pics\dino_left.png")  
-    if keys[pygame.K_d]:
-        player1.walk_right()
-        player1.icon = pygame.image.load("data\pics\dino_right.png")  
 
-    # Spiellogik hier integrieren
+    #Game over condition
+    if environment1.player.pos.y > HEIGHT +50:
+        for sprite in environment1.all_sprites:
+            sprite.rect.y -= max(environment1.player.vel.y, 10)
+            if sprite.rect.bottom < 0:
+                sprite.kill()
+            if len(environment1.solid_platforms) == 0:
+                end_screen(screen, environment1.score)
+                time.sleep(2)
+                gameactive = False
+                
     
-    #falls ein enemy den player hittet:
-    hits = pygame.sprite.spritecollide(player, enemies, False)
-    if hits:
-        gameactive = False
-        
-    
+                
+                
 
     # Spielfeld löschen
-    screen.fill(WEISS)
+    screen.fill(LIGHTBLUE)
 
     # Spielfeld/figuren zeichnen
-    screen.blit(player1.icon, (player1.xPos, player1.yPos))
-    for brick in environment1.bricks:
-        screen.blit(brick.icon, (brick.xPos, brick.yPos))
+    environment1.update()
+
+    environment1.all_sprites.draw(screen)
+
+    draw_text_on_screen(screen, str(environment1.score), 20, BLACK, WIDTH * (5 / 6), 15)
+
     # Fenster aktualisieren
     pygame.display.flip()
 
     # Refresh-Zeiten festlegen
     clock.tick(60)
-    
-    
 
+        
 
 pygame.quit()
