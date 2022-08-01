@@ -47,12 +47,14 @@ gameactive = True
 # Bildschirm Aktualisierungen einstellen
 clock = pygame.time.Clock()
 
+#show start screen
+wasd_or_arrow_keys =""
+wasd_or_arrow_keys = start_screen(screen)
 
 #create the environment
 environment1 = Environment.Environment(1)
 
-#show start screen
-start_screen(screen)
+
 
 # Schleife Hauptprogramm
 while gameactive:
@@ -64,12 +66,11 @@ while gameactive:
             print("Game closed")
         elif event.type == pygame.KEYDOWN:
 
-            #W and S keys for player, single jump event
-            if event.key == pygame.K_w:
+            #W / ARROW UP keys for player, single jump event
+            if event.key == pygame.K_w and wasd_or_arrow_keys == "wasd":
                 environment1.player.jump()
-            elif event.key == pygame.K_s:
-                None
-                #environment1.player.fall()
+            if event.key == pygame.K_UP and wasd_or_arrow_keys == "arrow":
+                environment1.player.jump()
             elif event.key == pygame.K_SPACE:
                 environment1.player_shoot()
         elif event.type == pygame.MOUSEBUTTONDOWN:

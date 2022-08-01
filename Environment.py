@@ -12,8 +12,9 @@ import random
 vec = pg.math.Vector2
 
 class Environment:
-    def __init__(self, level) -> None:
+    def __init__(self, level, wasd_or_arrow_keys) -> None:
         self.level = level
+        self.wasd_or_arrow_keys = wasd_or_arrow_keys
         self.all_sprites = pg.sprite.Group()
         self.all_platforms = pg.sprite.Group()
         self.solid_platforms = pg.sprite.Group()

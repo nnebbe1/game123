@@ -31,9 +31,6 @@ PLAYER_JUMP = 6
 PLAYER_NAME = ""
 
 PLATFORM_LIST1 = [(0,HEIGHT-40, WIDTH,50, "solid"),
-                    (0,HEIGHT-50, WIDTH-50,50, "solid"),
-                    (0,HEIGHT-100, WIDTH-100,50, "solid"),
-                    (0,HEIGHT-150, WIDTH-150,50, "solid"),
                     (WIDTH / 2 - 50, HEIGHT * 5/6, 100, 40, "solid"),
                     (125, HEIGHT * 4 / 6, 100, 40, "solid"),
                     (350, HEIGHT * 3 / 6, 100, 40, "solid"),
@@ -47,10 +44,11 @@ def draw_text_on_screen(screen, text, size, color, x, y):
     text_rect.midtop = (x ,y)
     screen.blit(text_surface, text_rect)
 
-def start_screen(screen):
+def start_screen(screen)->str:
     no_key = True
     dino_pos = vec(0, HEIGHT*0.2)
     move_dir = "left"
+    wasd_or_arrow_keys = ""
     while no_key:
         clock = pg.time.Clock()
         clock.tick(40)
@@ -58,9 +56,9 @@ def start_screen(screen):
         first_platform = pg.Surface((WIDTH, 20))
         first_platform.fill(BROWN)
         screen.blit(first_platform, (0, HEIGHT*0.25))
-        draw_text_on_screen(screen, "Move the dino with WASD" , 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.5 )
+        draw_text_on_screen(screen, "Move the dino with WASD or ARROW Keys" , 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.5 )
         draw_text_on_screen(screen,  "Shoot Fireballs with SPACE", 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.6 )
-        draw_text_on_screen(screen, "Press ANY key to start", 21, BLACK, WIDTH*0.75, HEIGHT*0.75)
+        draw_text_on_screen(screen, "Press W or ARROW UP to choose control schema", 21, BLACK, WIDTH*0.75, HEIGHT*0.75)
 
         dino_image = pg.image.load("data\pics\dino_right.png")
         dino_image_rect = dino_image.get_rect()
@@ -75,10 +73,17 @@ def start_screen(screen):
         pg.display.flip()
 
         for event in pg.event.get():
-            if event.type == pg.KEYUP:
+            if event.type == pg.K_w:
                 no_key = False
+                wasd_or_arrow_keys = "wasd"
+            if event.type == pg.K_UP:
+                no_key = False
+                wasd_or_arrow_keys = "arrow"
             if event.type == pg.QUIT:
+                print("dafuq")
                 pg.quit()
+                #return None
+    return wasd_or_arrow_keys
 
 def end_screen(screen, score):
     screen.fill(LIGHTBLUE)

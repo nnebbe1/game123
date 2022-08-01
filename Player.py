@@ -4,9 +4,10 @@ from helper import *
 vec = pg.math.Vector2
 
 class Player(pg.sprite.Sprite):
-    def __init__(self, environment) -> None:
+    def __init__(self, environment,wasd_or_arrow_keys) -> None:
         pg.sprite.Sprite.__init__(self)
         self.environment = environment
+        self.wasd_or_arrow_keys = wasd_or_arrow_keys
         self.image = pg.image.load("data\pics\dino_right.png")
         self.rect = self.image.get_rect()
         self.rect.midbottom = (WIDTH / 2, HEIGHT-40)
@@ -31,14 +32,25 @@ class Player(pg.sprite.Sprite):
 
         #acceleration left and right when key press
         keys = pg.key.get_pressed()
-        if keys[pg.K_a]:
-            self.image = pg.image.load("data\pics\dino_left.png") 
-            self.looking_dir = "left"
-            self.acc.x = -0.5
-        if keys[pg.K_d]:
-            self.image = pg.image.load("data\pics\dino_right.png") 
-            self.looking_dir = "right"
-            self.acc.x = 0.5
+        if self.wasd_or_arrow_keys == "wasd":
+            if keys[pg.K_a]:
+                self.image = pg.image.load("data\pics\dino_left.png") 
+                self.looking_dir = "left"
+                self.acc.x = -0.5
+            if keys[pg.K_d]:
+                self.image = pg.image.load("data\pics\dino_right.png") 
+                self.looking_dir = "right"
+                self.acc.x = 0.5
+        elif self.wasd_or_arrow_keys == "arrow":
+            if keys[pg.K_LEFT]:
+                self.image = pg.image.load("data\pics\dino_left.png") 
+                self.looking_dir = "left"
+                self.acc.x = -0.5
+            if keys[pg.K_RIGHT]:
+                self.image = pg.image.load("data\pics\dino_right.png") 
+                self.looking_dir = "right"
+                self.acc.x = 0.5
+
         
         # motion with friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
