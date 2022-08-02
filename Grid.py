@@ -70,29 +70,34 @@ class Grid:
                 self.grid[i][23] = 1
 
             # Define all grid cells which will have a butterfly. Butterflies are coded with 2
-            for i in range(7,9):
-                self.grid[i][3] = 2
+            
+            self.grid[8][3] = 2
+            self.grid[16][4] = 2
+            self.grid[19][4] = 2
 
-            for i in range(15,20):
-                self.grid[i][4] = 2
+            self.grid[1][5] = 2
+            self.grid[3][5] = 2
+            self.grid[5][5] = 2
 
-            for i in range(6):
-                self.grid[i][5] = 2
+            self.grid[20][7] = 2
+            self.grid[23][7] = 2
+            self.grid[26][7] = 2
 
-            for i in range(19,27):
-                self.grid[i][7] = 2
+            self.grid[6][8] = 2
+            self.grid[8][8] = 2
+            self.grid[10][8] = 2
 
-            for i in range(5,11):
-                self.grid[i][8] = 2
 
-            for i in range(11,19):
-                self.grid[i][11] = 2
+            self.grid[13][11] = 2
+            self.grid[15][11] = 2
+            self.grid[17][11] = 2
 
-            for i in range(26,30):
-                self.grid[i][11] = 2
+            self.grid[27][11] = 2
+            self.grid[29][11] = 2
 
             for i in range(4,10):
-                self.grid[i][14] = 2
+                self.grid[5][14] = 2
+                self.grid[9][14] = 2
 
             for i in range(28,30):
                 self.grid[i][14] = 2
