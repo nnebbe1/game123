@@ -10,10 +10,10 @@ class Player(pg.sprite.Sprite):
         self.environment = environment
         self.wasd_or_arrow_keys = wasd_or_arrow_keys
         self.image = pg.image.load("data\images\dino_right.png")
-        self.rect = self.image.get_rect()
-        self.rect.center = (WIDTH / 2, HEIGHT-40)
         self.looking_dir = "right"
-        self.pos = vec(WIDTH / 2, HEIGHT-40)
+        self.rect = self.image.get_rect()
+        self.rect.center = (WIDTH/2, HEIGHT/2)
+        self.pos = vec(WIDTH/2, HEIGHT/2)
         self.grid_pos = vec(int(self.pos.x / 32), int(self.pos.y / 32))
         self.vel = vec(0,0)
         self.acc = vec(0,0)

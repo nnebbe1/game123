@@ -30,12 +30,12 @@ PLAYER_FRICTION = -0.12
 PLAYER_JUMP = 6
 PLAYER_NAME = ""
 
-PLATFORM_LIST1 = [(0,HEIGHT-40, WIDTH,50, "solid"),
-                    (WIDTH / 2 - 50, HEIGHT * 5/6, 100, 40, "solid"),
-                    (125, HEIGHT * 4 / 6, 100, 40, "solid"),
-                    (350, HEIGHT * 3 / 6, 100, 40, "solid"),
-                    (175, HEIGHT * 2 / 6, 50, 40, "solid"),
-                    (175, HEIGHT * 1 / 6, 50, 40, "solid")]
+#PLATFORM_LIST1 = [(0,HEIGHT-40, WIDTH,50, "solid"),
+                   # (WIDTH / 2 - 50, HEIGHT * 5/6, 100, 40, "solid"),
+                    #(125, HEIGHT * 4 / 6, 100, 40, "solid"),
+                    #(350, HEIGHT * 3 / 6, 100, 40, "solid"),
+                    #(175, HEIGHT * 2 / 6, 50, 40, "solid"),
+                    #(175, HEIGHT * 1 / 6, 50, 40, "solid")]
 
 def draw_text_on_screen(screen, text, size, color, x, y):
     font = pg.font.Font(font_name, size)

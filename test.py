@@ -11,12 +11,5 @@ import random
 from helper import *
 import time
 import csv
-from tkinter import *
-from tkinter import ttk
-
-scoreboard_file = open("data\scoreboard.csv", "a", newline="")  
-print(user_name)
-writer = csv.writer(scoreboard_file)
-writer.writerow([user_name])
-writer.writerow('ass')
-scoreboard_file.close()
+import numpy as np
+import matplotlib

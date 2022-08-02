@@ -81,15 +81,15 @@ while gameactive:
             print("mousebutton")
 
     #Game over condition
-    if environment1.player.pos.y > HEIGHT +50:
-        for sprite in environment1.all_sprites:
-            sprite.rect.y -= max(environment1.player.vel.y, 10)
-            if sprite.rect.bottom < 0:
-                sprite.kill()
-            if len(environment1.solid_platforms) == 0:
-                end_screen(screen, environment1.score)
-                time.sleep(2)
-                gameactive = False
+   # if environment1.player.pos.y > HEIGHT +50:
+    #    for sprite in environment1.all_sprites:
+    #        sprite.rect.y -= max(environment1.player.vel.y, 10)
+    #        if sprite.rect.bottom < 0:
+    #            sprite.kill()
+    #        if len(environment1.solid_platforms) == 0:
+                #end_screen(screen, environment1.score)
+                #time.sleep(2)
+    #            gameactive = False
                 
 
     # Spielfeld löschen
