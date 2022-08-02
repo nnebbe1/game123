@@ -11,9 +11,10 @@ class Player(pg.sprite.Sprite):
         self.wasd_or_arrow_keys = wasd_or_arrow_keys
         self.image = pg.image.load("data\images\dino_right.png")
         self.rect = self.image.get_rect()
-        self.rect.midbottom = (WIDTH / 2, HEIGHT-40)
+        self.rect.center = (WIDTH / 2, HEIGHT-40)
         self.looking_dir = "right"
         self.pos = vec(WIDTH / 2, HEIGHT-40)
+        self.grid_pos = vec(int(self.pos.x / 32), int(self.pos.y / 32))
         self.vel = vec(0,0)
         self.acc = vec(0,0)
         self.climbing = False
@@ -35,20 +36,20 @@ class Player(pg.sprite.Sprite):
         keys = pg.key.get_pressed()
         if self.wasd_or_arrow_keys == "wasd":
             if keys[pg.K_a]:
-                self.image = pg.image.load("data\pics\dino_left.png") 
+                self.image = pg.image.load("data\images\dino_left.png") 
                 self.looking_dir = "left"
                 self.acc.x = -0.5
             if keys[pg.K_d]:
-                self.image = pg.image.load("data\pics\dino_right.png") 
+                self.image = pg.image.load("data\images\dino_right.png") 
                 self.looking_dir = "right"
                 self.acc.x = 0.5
         elif self.wasd_or_arrow_keys == "arrow":
             if keys[pg.K_LEFT]:
-                self.image = pg.image.load("data\pics\dino_left.png") 
+                self.image = pg.image.load("data\images\dino_left.png") 
                 self.looking_dir = "left"
                 self.acc.x = -0.5
             if keys[pg.K_RIGHT]:
-                self.image = pg.image.load("data\pics\dino_right.png") 
+                self.image = pg.image.load("data\images\dino_right.png") 
                 self.looking_dir = "right"
                 self.acc.x = 0.5
 
@@ -57,6 +58,7 @@ class Player(pg.sprite.Sprite):
         self.acc.x += self.vel.x * PLAYER_FRICTION
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
+        self.grid_pos = vec(int(self.pos.x / 32), int(self.pos.y / 32))
 
         # wrap around the screen
         if self.pos.x > WIDTH:

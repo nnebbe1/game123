@@ -10,7 +10,7 @@ from tkinter import ttk
 vec = pg.math.Vector2
 
 TITEL = "Dino's path to victory"
-WIDTH = 1200
+WIDTH = 960
 HEIGHT = 800
 FPS = 60
 FONT_NAME = 'arial'
@@ -60,7 +60,7 @@ def start_screen(screen)->str:
         draw_text_on_screen(screen,  "Shoot Fireballs with SPACE", 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.6 )
         draw_text_on_screen(screen, "Press W or ARROW UP to choose control schema", 21, BLACK, WIDTH*0.75, HEIGHT*0.75)
 
-        dino_image = pg.image.load("data\pics\dino_right.png")
+        dino_image = pg.image.load("data\images\dino_right.png")
         dino_image_rect = dino_image.get_rect()
         screen.blit(dino_image, dino_pos)
        
@@ -77,13 +77,13 @@ def start_screen(screen)->str:
                 if event.key == pg.K_w:
                     wasd_or_arrow_keys = "wasd"
                     no_key = False 
-                    print("wasd")
+                    print("WASD Control")
                 if event.key == pg.K_UP:
                     wasd_or_arrow_keys = "arrow"
                     no_key = False
-                    print("arrow")
+                    print("Arrow Control")
                 if event.type == pg.QUIT:
-                    print("dafuq")
+                    print("QUIT")
                     pg.quit()
                     #return None
     return wasd_or_arrow_keys
