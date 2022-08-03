@@ -13,28 +13,25 @@ class Plot():
         self.pigeons = 0
         self.name = ''
         self.last_row = []
-        self.allscores = []
         self.color = RED
         self.tick_label = ["Score", "Butterflies", "Pigeons", "Highscore"]
-        self.scoreboard = pd.read_csv('scoreboard.csv')
+        self.scoreboard = pd.read_csv('data\scoreboard.csv')
+        print(self.scoreboard)
         self.fig, self.ax = plt.subplots(nrows = 1, ncols = 1)
 
     #sets the different scores to the correct numbers from the csv file         
     def set_scores(self):
         self.last_row = self.scoreboard.iloc[-1].tolist()
         self.name = self.last_row[0]
-        self.score = int(self.last_row[1])
-        self.bflies = int(self.last_row[2])
-        self.pigeons = int(self.last_row[3])
-        self.allscores = self.scoreboard.iloc[:,1].tolist()
-        for i in range(len(self.allscores)):
-            self.allscores[i] = int(self.allscores[i])
-        self.highsc = self.allscores.max()
+        self.score = self.last_row[1]
+        self.bflies = self.last_row[2]
+        self.pigeons = self.last_row[3]
+        self.highsc = max(self.scoreboard.iloc[:,1].tolist())
 
     #plots the personal score, the number of butterflies that were caught and the number of pigeons that were shot
     #also plots the highscore
     def plot(self):
-        self.ax.bar(self.x, (self.score, self.bflies, self.pigeons, self.highsc), color = self.color, tick_label = self.tick_label )
-        self.ax.set_title('Scoreboard of' + self.name)
+        self.ax.bar(self.x, (self.score, self.bflies, self.pigeons, self.highsc),  tick_label = self.tick_label )
+        self.ax.set_title('Scoreboard of ' + self.name)
 
         plt.show()

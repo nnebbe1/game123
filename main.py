@@ -10,6 +10,7 @@ import Player
 import Environment
 import helper
 import Platform
+import Plots
 import random
 from helper import *
 import time
@@ -23,7 +24,7 @@ def button_click(score, butterflies, pigeons):
     scoreboard_file = open("data\scoreboard.csv", "a", newline="")  
     writer = csv.writer(scoreboard_file)
     user_name_input = str(entry_field.get())
-    writer.writerow([str(user_name_input) + ',' + str(score) + ',' + str(butterflies) + ',' + str(pigeons)])
+    writer.writerow([str(user_name_input), score, butterflies, pigeons])
     scoreboard_file.close()
     root.destroy()
     return
@@ -124,6 +125,10 @@ done_button.pack()
 root.mainloop()
 
 pg.quit()
+
+plot1 = Plots.Plot() 
+plot1.set_scores()
+plot1.plot()
 
 
 

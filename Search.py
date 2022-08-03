@@ -1,10 +1,4 @@
-class Grid(self):
-    
-    
 
-
-    def h(self, n):
-    
 
 
     def A_Search(start, goal):
