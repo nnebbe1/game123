@@ -35,9 +35,6 @@ class Enemy(pg.sprite.Sprite):
     
     def update(self):
         self.move_towards_player()
-        #hits = pg.sprite.spritecollide(self, self.environment.all_platforms, False)
-        #if hits:
-         #   self.speed = -self.speed
             
     def set_speed(self, speed):
         self.speed = speed

@@ -61,10 +61,3 @@
             closed_lst.add(n)
         
         return None
-                
-                
-                
-                
-                
-                
-                
