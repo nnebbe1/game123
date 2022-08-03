@@ -39,7 +39,6 @@ class Plot():
         self.ax.bar(self.x, (self.score, self.bflies, self.pigeons), tick_label = self.tick_label,  color = '#77CEF0' )
         print(self.highb)
         self.ax.bar(self.x2, (self.highsc, self.highb, self.highp), color = '#77F077')
-        #self.ax.xticks(self.x, self.tick_label)
         self.ax.set_title('Scoreboard of ' + self.name)
         self.ax.legend(["Your score", "Highscores"])
 
