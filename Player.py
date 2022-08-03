@@ -1,3 +1,4 @@
+from turtle import width
 import pygame as pg
 from helper import *
 
@@ -57,14 +58,15 @@ class Player(pg.sprite.Sprite):
         # motion with friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
         self.vel += self.acc
-        self.pos += self.vel + 0.5 * self.acc
-        self.grid_pos = vec(int(self.pos.x / 32), int(self.pos.y / 32))
 
-        # wrap around the screen
-        if self.pos.x > WIDTH:
-            self.pos.x = 0
-        if self.pos.x < 0:
-            self.pos.x = WIDTH
+        if self.pos.x < WIDTH-16 and self.pos.x > 16:
+            self.pos += self.vel + 0.5 * self.acc
+        if self.pos.x >= WIDTH-16:
+            self.pos.x = WIDTH - 21
+        if self.pos.x <= 16:
+            self.pos.x = 22
+
+        self.grid_pos = vec(int(self.pos.x / 32), int(self.pos.y / 32))
 
         self.rect.midbottom = self.pos
         

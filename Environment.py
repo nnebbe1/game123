@@ -93,28 +93,28 @@ class Environment:
                 self.player.vel.y = 0
         
         # if player reaches top of screen, move "screen"
-        if self.player.rect.top <= HEIGHT / 4:
-            self.player.pos.y += abs(self.player.vel.y)
-            for plat in self.all_platforms:
-                plat.rect.y += abs(self.player.vel.y)
-            for butterfly in self.all_butterflies:
-                butterfly.rect.y += abs(self.player.vel.y)
-            for enemy in self.enemies:
-                enemy.rect.y += abs(self.player.vel.y)
+        #if self.player.rect.top <= HEIGHT / 4:
+            #self.player.pos.y += abs(self.player.vel.y)
+            #for plat in self.all_platforms:
+            #    plat.rect.y += abs(self.player.vel.y)
+            #for butterfly in self.all_butterflies:
+           #     butterfly.rect.y += abs(self.player.vel.y)
+          #  for enemy in self.enemies:
+         #       enemy.rect.y += abs(self.player.vel.y)
 
-        if self.player.rect.top >= HEIGHT * 3/ 4:
-            self.player.pos.y -= abs(self.player.vel.y)
-            for plat in self.all_platforms:
-                plat.rect.y -= abs(self.player.vel.y)
-            for butterfly in self.all_butterflies:
-                butterfly.rect.y -= abs(self.player.vel.y)
-            for enemy in self.enemies:
-                enemy.rect.y -= abs(self.player.vel.y)
+        #if self.player.rect.top >= HEIGHT * 3/ 4:
+        #    self.player.pos.y -= abs(self.player.vel.y)
+        #    for plat in self.all_platforms:
+        #        plat.rect.y -= abs(self.player.vel.y)
+        #    for butterfly in self.all_butterflies:
+        #        butterfly.rect.y -= abs(self.player.vel.y)
+        #    for enemy in self.enemies:
+        #        enemy.rect.y -= abs(self.player.vel.y)
             
-            for b in self.all_butterflies:
-                b.rect.y += abs(self.player.vel.y)
-                if b.rect.top >= HEIGHT:
-                    b.kill()
+            #for b in self.all_butterflies:
+            #    b.rect.y += abs(self.player.vel.y)
+            #    if b.rect.top >= HEIGHT:
+            #        b.kill()
             
         while len(self.all_butterflies) < random.randrange(5):
             b = Butterfly.Butterfly(random.randrange(0, self.player.rect.top), random.randrange(0, WIDTH))

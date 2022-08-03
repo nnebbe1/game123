@@ -95,36 +95,36 @@ class Grid:
             self.grid[27][11] = 2
             self.grid[29][11] = 2
 
-            for i in range(4,10):
-                self.grid[5][14] = 2
-                self.grid[9][14] = 2
+            self.grid[5][14] = 2
+            self.grid[9][14] = 2
 
-            for i in range(28,30):
-                self.grid[i][14] = 2
+            self.grid[29][14] = 2
 
-            for i in range(19,24):
-                self.grid[i][15] = 2
+            self.grid[20][15] = 2
+            self.grid[23][15] = 2
+                
 
-            for i in range(5):
-                self.grid[i][17] = 2
+            
+            self.grid[2][17] = 2
+            self.grid[4][17] = 2
 
-            for i in range(11,17):
-                self.grid[i][17] = 2
+            self.grid[12][17] = 2
+            self.grid[14][17] = 2
+            self.grid[16][17] = 2
 
-            for i in range(5,11):
-                self.grid[i][20] = 2
 
-            for i in range(18,24):
-                self.grid[i][20] = 2
+            self.grid[6][20] = 2
+            self.grid[10][20] = 2
 
-            for i in range(10,13):
-                self.grid[i][23] = 2
+            self.grid[20][20] = 2
+            self.grid[22][20] = 2
 
-            for i in range(26,29):
-                self.grid[i][24] = 2
+            self.grid[11][23] = 2
 
-            for i in range(7):
-                self.grid[i][24] = 2
+            self.grid[28][24] = 2
+
+            #for i in range(7):
+            #    self.grid[i][24] = 2
 
         if level == 2:
 
