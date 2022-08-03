@@ -32,6 +32,7 @@ class Environment:
         self.enemies = pg.sprite.Group()
         self.score = 0
         self.butterfly_score = 0
+        self.pigeon_score = 0
         
         self.all_sprites.add(self.player)
 
@@ -72,12 +73,19 @@ class Environment:
                 e = Enemy.Enemy(self.player)
                 self.all_sprites.add(e)
                 self.enemies.add(e)
-  
+                self.pigeon_score += 1
+
         if self.all_butterflies:
             hits = pg.sprite.spritecollide(self.player, self.all_butterflies, True)
             if hits:
                 self.score += 20
                 self.butterfly_score += 1
+
+    #if the enemy hits the player the game is over    
+        if self.enemies:
+            hits = pg.sprite.spritecollide(self.player, self.enemies, True)
+            if hits:
+                return False
             
         #check if player hits a platform - only when falling
         if self.player.vel.y > 0:
@@ -124,4 +132,14 @@ class Environment:
 
     def get_pos(self):
         return self.player.get_pos()
+
+    def get_score(self):
+        return self.score
+
+    def get_butterflies(self):
+        return self.butterfly_score
+
+    def get_pigeons(self):
+        return self.pigeon_score
+
         

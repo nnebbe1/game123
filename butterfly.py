@@ -17,8 +17,3 @@ class Butterfly(pg.sprite.Sprite):
     def update(self):
         pass
         
-        
-    
-        
-        
-        

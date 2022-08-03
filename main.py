@@ -19,11 +19,11 @@ from tkinter import ttk
 
 
 
-def button_click():
+def button_click(score, butterflies, pigeons):
     scoreboard_file = open("data\scoreboard.csv", "a", newline="")  
     writer = csv.writer(scoreboard_file)
     user_name_input = str(entry_field.get())
-    writer.writerow([user_name_input])
+    writer.writerow([str(user_name_input) + ',' + str(score) + ',' + str(butterflies) + ',' + str(pigeons)])
     scoreboard_file.close()
     root.destroy()
     return
@@ -108,6 +108,9 @@ while gameactive:
     # Refresh-Zeiten festlegen
     clock.tick(60)
 
+def button_clicked():
+    button_click(environment1.get_score(), environment1.get_butterflies(), environment1.get_pigeons())
+
     
 root = Tk()
 root.wm_title("Dino's path to victory")
@@ -115,9 +118,12 @@ lable = ttk.Label( text="Write your name to put it on the scoreboard!")
 lable.pack()
 entry_field = Entry(root, width=30)
 entry_field.pack()
-done_button = ttk.Button(root, text="Done", command=button_click)
+
+done_button = ttk.Button(root, text="Done", command=button_clicked)
 done_button.pack()
 root.mainloop()
 
 pg.quit()
+
+
 
