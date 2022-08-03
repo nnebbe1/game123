@@ -4,21 +4,11 @@ from helper import *
 vec = pg.math.Vector2
 
 class Platform(pg.sprite.Sprite):
-    def __init__(self, x, y, w, h, type) ->None:
+    def __init__(self, grid_x ,grid_y, type) ->None:
         if type == "solid":
             self.type = "solid"
             pg.sprite.Sprite.__init__(self)
-            self.image = pg.Surface((w,h))
-            self.image.fill(BROWN)
+            self.image = pg.image.load("data\images\_Brick.png") 
             self.rect = self.image.get_rect()
-            self.rect.x = x
-            self.rect.y = y
-
-        if type == "not_solid":
-            self.type = "not_solid"
-            pg.sprite.Sprite.__init__(self)
-            self.image = pg.Surface((w,h))
-            self.image.fill(WHITE)
-            self.rect = self.image.get_rect()
-            self.rect.x = x
-            self.rect.y = y
+            self_gridposition = vec(int(grid_x), int(grid_y))
+            self.rect.center = vec((HEIGHT-grid_x*32) +144, (WIDTH-grid_y*32)-144)
