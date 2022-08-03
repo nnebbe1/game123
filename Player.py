@@ -5,7 +5,14 @@ vec = pg.math.Vector2
 
 class Player(pg.sprite.Sprite):
     
-    def __init__(self, environment,wasd_or_arrow_keys) -> None:
+    def __init__(self, environment,wasd_or_arrow_keys):
+        '''
+            Initialises the Player
+
+                Parameters:
+                    environment(obj): the environment in which the player exists
+                    wasd_or_arrow_keys(str): determines how player is controlled
+        '''
         pg.sprite.Sprite.__init__(self)
         self.environment = environment
         self.wasd_or_arrow_keys = wasd_or_arrow_keys
@@ -20,6 +27,9 @@ class Player(pg.sprite.Sprite):
         self.climbing = False
 
     def jump(self):
+        '''
+            Player can jump
+        '''
         self.rect.y += 1
         hits = pg.sprite.spritecollide(self, self.environment.all_platforms, False)
         self.rect.y -= 1 
@@ -29,6 +39,9 @@ class Player(pg.sprite.Sprite):
 
 
     def update(self):
+        '''
+            Updates the player by moving it with user's input
+        '''
         #gravity
         self.acc = vec(0,0.2)
 
@@ -69,4 +82,8 @@ class Player(pg.sprite.Sprite):
         self.rect.midbottom = self.pos
         
     def get_pos(self):
+        '''
+            Returns:
+                self.pos(vec): player's position
+        '''
         return self.pos

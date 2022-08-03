@@ -6,6 +6,9 @@ from helper import *
 class Plot():
     
     def __init__(self):
+        '''
+            Initialises a Plot object
+        '''
         self.x = [10, 15]
         self.x2 = [10.7, 15.7]
         self.score = 0
@@ -19,11 +22,13 @@ class Plot():
         self.color = RED
         self.tick_label = ["Butterflies", "Pigeons"]
         self.scoreboard = pd.read_csv('data\scoreboard.csv')
-        print(self.scoreboard)
         self.fig, self.axes = plt.subplots(nrows = 2, ncols = 1)
 
-    #sets the different scores to the correct numbers from the csv file         
+   
     def set_scores(self):
+        '''
+            Sets the different scores to the correct numbers from the csv file  
+        '''
         self.last_row = self.scoreboard.iloc[-1].tolist()
         self.name = self.last_row[0]
         self.score = self.last_row[1]
@@ -36,6 +41,10 @@ class Plot():
     #plots the personal score, the number of butterflies that were caught and the number of pigeons that were shot
     #also plots the highest scores
     def plot(self):
+        '''
+        plots the personal score, the number of butterflies that were caught and the number of pigeons that were shot
+        also plots the highest scores
+        '''
         self.axes[0].bar(5, self.score, tick_label = "Score", width = 0.3, color = '#77CEF0')
         self.axes[0].bar(5.7, self.highsc, width = 0.3,  color = '#CD5C5C')
         self.axes[1].bar(self.x, (self.bflies, self.pigeons), tick_label = self.tick_label,  color = '#77CEF0' )

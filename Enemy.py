@@ -1,14 +1,20 @@
 import pygame as pg
 import random
-import Player
 from helper import *
-import Environment
+
 
 
 
 class Enemy(pg.sprite.Sprite):
     
     def __init__(self, player):
+        '''
+            Initialises an object of class Enemy
+            
+            Parameters:
+                player(obj): the player the enemy has as its target
+                
+        '''
         pg.sprite.Sprite.__init__(self)
         self.player = player
         self.image = pg.image.load('data\images\pigeon_left.png')
@@ -34,8 +40,19 @@ class Enemy(pg.sprite.Sprite):
       
     
     def update(self):
+        '''
+            A function to update the Enemy --> moves after the player
+        '''
+
         self.move_towards_player()
             
     def set_speed(self, speed):
+        '''
+            Sets the Enemy's speed
+
+            Parameters:
+                speed(int): the wanted speed
+
+        '''
         self.speed = speed
         

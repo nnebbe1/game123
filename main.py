@@ -1,19 +1,10 @@
 # Importieren der Pygame-Bibliothek
-from asyncore import write
-from lib2to3.pgen2.token import NEWLINE
-from pydoc import pipepager
-from unicodedata import name
 import pygame as pg
 
-import Enemy
-import Player
+
 import Environment
-import helper
-import Platform
 import Plots
-import random
 from helper import *
-import time
 import csv
 from tkinter import *
 from tkinter import ttk
@@ -21,6 +12,14 @@ from tkinter import ttk
 
 
 def button_click(score, butterflies, pigeons):
+    '''
+        Saves the user data in a csv
+
+        Parameters:
+            score(int): the user's score
+            butterflies(int): the user's butterfly score
+            pigeons(int); the user's pigeon score
+    '''
     scoreboard_file = open("data\scoreboard.csv", "a", newline="")  
     writer = csv.writer(scoreboard_file)
     user_name_input = str(entry_field.get())
@@ -29,14 +28,14 @@ def button_click(score, butterflies, pigeons):
     root.destroy()
     return
 
-# initialisieren von pygame
+#initialising pygame
 pg.init()
 
-# Fenster öffnen
+# opening window
 screen = pg.display.set_mode((WIDTH, HEIGHT))
 
 
-# Titel für Fensterkopf
+# setting game icon and title
 pg.display.set_caption(TITEL)
 icon = pg.image.load("data\images\dino_right.png")
 pg.display.set_icon(icon)
@@ -45,7 +44,7 @@ pg.display.set_icon(icon)
 #Game is running as long as is true
 gameactive = True
 
-# Bildschirm Aktualisierungen einstellen
+# clock for updating the screen
 clock = pg.time.Clock()
 
 #show start screen
@@ -61,10 +60,10 @@ environment1 = Environment.Environment(1, wasd_or_arrow_keys)
 #show start screen
 start_screen(screen)
 
-# Schleife Hauptprogramm
+# main loop
 while gameactive:
     keys = pg.key.get_pressed()
-    # Überprüfen, ob Nutzer eine Aktion durchgeführt hat
+    # checks whether user has pressed a button 
     for event in pg.event.get():
         if event.type == pg.QUIT:
             gameactive = False
@@ -93,23 +92,26 @@ while gameactive:
     #            gameactive = False
                 
 
-    # Spielfeld löschen
+    # deleting the playing field
     screen.fill(LIGHTBLUE)
 
-    # Spielfeld/figuren zeichnen
+    # drawing the environment
     environment1.update()
 
     environment1.all_sprites.draw(screen)
 
     draw_text_on_screen(screen, str(environment1.score), 20, BLACK, WIDTH * (5 / 6), 15)
 
-    # Fenster aktualisieren
+    # updating screen
     pg.display.flip()
 
-    # Refresh-Zeiten festlegen
+    # refresh-time
     clock.tick(60)
 
 def button_clicked():
+    '''
+        A function to use the button click within tkinter
+    '''
     button_click(environment1.get_score(), environment1.get_butterflies(), environment1.get_pigeons())
 
     
@@ -124,8 +126,10 @@ done_button = ttk.Button(root, text="Done", command=button_clicked)
 done_button.pack()
 root.mainloop()
 
+#exiting pygame
 pg.quit()
 
+#creating plot for user's scores
 plot1 = Plots.Plot() 
 plot1.set_scores()
 plot1.plot()

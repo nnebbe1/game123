@@ -6,15 +6,19 @@ class Grid:
     
 
     def  __init__(self, level):
+        '''
+            Initialises the Grid in which the environment is divided
+
+            Parameters:
+                level(int): determines the level of the game and thereby the outlay of the grid
+        '''
 
         self.grid =  [[0 for j in range(25)] for i in range(30)] 
-        
-        #for i in range(30):
-        #    for j in range(25):
-        #        self.grid[i][j] = 0
 
+
+        #Defines the ground as a Platform (coded with 1)
         for i in range(30):
-            self.grid[i][1] = 1 #Boden
+            self.grid[i][1] = 1
 
         if level == 1:
             # Define all grid cells which will have a platform. Platforms are coded with 1

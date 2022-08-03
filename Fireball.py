@@ -4,7 +4,13 @@ from helper import *
 vec = pg.math.Vector2
 
 class Fireball(pg.sprite.Sprite):
-    def __init__(self, player) -> None:
+    def __init__(self, player):
+        '''
+            Initialises an object bof the class Fireball
+
+            Parameters:
+                player(obj):  the player is needed to know where and in which direction the Fireball is shot
+        '''
         pg.sprite.Sprite.__init__(self)
         self.player = player
         self.image = pg.Surface((14,14))
@@ -20,6 +26,9 @@ class Fireball(pg.sprite.Sprite):
             self.pos = vec(self.player.pos.x - 20, self.player.pos.y-15)
 
     def update(self):
+        '''
+            Updates the Fireball by letting it fall less horizontally and more vertically
+        '''
         if self.vel.x > 0:
             self.vel -= vec(0.05, -0.03)
         elif self.vel.x < 0:
