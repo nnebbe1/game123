@@ -3,6 +3,8 @@ import random
 import Player
 from helper import *
 import Environment
+import Grid
+import math
 
 vec = pg.math.Vector2
 
@@ -31,10 +33,11 @@ class Enemy(pg.sprite.Sprite):
     def set_speed(self, speed):
         self.speed = speed
 
-    def h(self):
-        x_distance = abs(self.grid_pos.x - self.player.gird_pos.x)
-        y_distance = abs(self.grid_pos.y - self.player.gird_pos.y)
-        return x_distance + y_distance
+    def heuristic_function(self,grid_node):
+        x_coord, y_coord = grid_node
+        x_distance = abs(x_coord - self.player.gird_pos.x)
+        y_distance = abs(y_coord - self.player.gird_pos.y)
+        return math.sqr(pow(x_distance, 2) + pow(y_distance,2))
 
     def A_Search(self):
         # get start and goal from the position of the pigeon and the positon of the player
@@ -52,11 +55,11 @@ class Enemy(pg.sprite.Sprite):
         path[start] = start
     
         while open_lst: 
-            current_node = None
+            n = None
         
             for v in open_lst:
-                if current_node == None or dists[v] + self.h(v) < dists[n] + self.h(n):
-                    current_node = v
+                if n == None or dists[v] + self.heuristic_function(v) < dists[n] + self.heuristic_function(n):
+                    n = v
                 
             if n == None:
                 return None
