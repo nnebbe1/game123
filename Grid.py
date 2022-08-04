@@ -1,17 +1,26 @@
 import pygame as pg 
 import math
 
-
+# This class implements the search grid
+# This grid is layed over the playing field and is used in the A Star search of the enemy
+# It also helps to set up the loction of the platforms and butterflies
 class Grid:
     
-
     def  __init__(self, level):
+        
+        # Define all grid cells which will have a platform. Platforms are coded with 1
+        # Grid cells with 2 will have butterflies
+        # Grid cells with 0 will be empty
 
-        self.grid =  [[0 for j in range(25)] for i in range(30)] 
-        for i in range(30):
-            self.grid[i][1] = 1 #Boden
+        self.grid =  [[0 for j in range(100)] for i in range(100)] 
+
+        # leaves room for addition of other levels with different set up   
         if level == 1:
-            # Define all grid cells which will have a platform. Platforms are coded with 1
+            #floor
+            for i in range(30):
+                self.grid[i][1] = 1
+
+            # different platforms
             for i in range(7,9):
                 self.grid[i][2] = 1
             for i in range(15,20):
@@ -82,6 +91,7 @@ class Grid:
             self.grid[11][23] = 2
             self.grid[28][24] = 2
 
+        #possible second level that we did not have the time to finish
         if level == 2:
             for i in range(6):
                 self.grid[i][3] = 1
@@ -114,16 +124,31 @@ class Grid:
             for i in range(1,5):
                 self.grid[i][23] = 1
         
-        def get_neighbors(self, x,y)->list():
+    def get_neighbors_with_dist(self,x,y)->list():
+        """
+        This function is used in the A star search of the enemy class
+        
+        """
             temp_list = list()
+            x = int(x)
+            y = int(y)
             if self.grid[x-1][y] == 0:
-                temp_list.append((x-1,y))
+                temp_list.append((x-1,y,1))
             if self.grid[x][y-1] == 0:
-                temp_list.append((x,y-1))
+                temp_list.append((x,y-1,1))
             if self.grid[x][y+1] == 0:
-                temp_list.append((x,y+1))
+                temp_list.append((x,y+1,1))
             if self.grid[x+1][y] == 0:
-                temp_list.append((x+1,y))
+                temp_list.append((x+1,y,1))
+
+            if self.grid[x+1][y+1] == 0:
+                temp_list.append((x+1,y+1,1.424))
+            if self.grid[x+1][y-1] == 0:
+                temp_list.append((x+1,y-1,1.424))
+            if self.grid[x-1][y+1] == 0:
+                temp_list.append((x-1,y+1,1.424))
+            if self.grid[x-1][y-1] == 0:
+                temp_list.append((x-1,y-1,1.424))
             return temp_list
 
             

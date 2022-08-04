@@ -1,4 +1,3 @@
-from turtle import width
 import pygame as pg
 from helper import *
 
@@ -18,9 +17,12 @@ class Player(pg.sprite.Sprite):
         self.grid_pos = vec(int(self.pos.x / 32), int(self.pos.y / 32))
         self.vel = vec(0,0)
         self.acc = vec(0,0)
-        self.climbing = False
 
     def jump(self):
+        """
+        This function implements the jumping of the player
+        """
+        #check if underneath the player is a platform, if yes, jump
         self.rect.y += 1
         hits = pg.sprite.spritecollide(self, self.environment.all_platforms, False)
         self.rect.y -= 1 
@@ -30,6 +32,10 @@ class Player(pg.sprite.Sprite):
 
 
     def update(self):
+        """
+        This function updates the position, velocity and acceleration of the player
+        It also checks for user input and adjusts looking direction and acceleration accordingly.
+        """
         #gravity
         self.acc = vec(0,0.2)
 
@@ -58,16 +64,18 @@ class Player(pg.sprite.Sprite):
         # motion with friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
         self.vel += self.acc
-
-        if self.pos.x < WIDTH-16 and self.pos.x > 16:
+        # movement when inside the screen
+        if self.pos.x < WIDTH-16 and self.pos.x > 16: 
             self.pos += self.vel + 0.5 * self.acc
+
+        #makes sure that the player cannot move outside of the screen
         if self.pos.x >= WIDTH-16:
             self.pos.x = WIDTH - 21
         if self.pos.x <= 16:
             self.pos.x = 22
 
+        #update gridposition and rect position accordingly
         self.grid_pos = vec(int(self.pos.x / 32), int(self.pos.y / 32))
-
         self.rect.midbottom = self.pos
         
     def get_pos(self):
