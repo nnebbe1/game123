@@ -47,6 +47,19 @@ class Enemy(pg.sprite.Sprite):
         self.speed = speed
 
     def heuristic_function(self,grid_node:tuple)->int:
+        '''
+        Heuristic function that is used in the A* Search
+
+
+        Parameters:
+                self(Enemy) : The pigeon
+                grid_node(int tupel): the x and y coord of a grid node
+
+        Returns:
+                The euclidian distance between the pigeon 
+                and the player character in the grid
+                
+        '''
         x_coord, y_coord = grid_node
         x_distance = int(abs(x_coord - self.player.grid_pos.x))+1
         y_distance = int(abs(y_coord - self.player.grid_pos.y))+1
@@ -54,11 +67,22 @@ class Enemy(pg.sprite.Sprite):
 
     
     def move_towards_player(self):
+
+        '''
+        Moves the pigeon towards the player along a vector, once a path an a next step has been determined
+        Is used in the update function of the Enemy class
+        
+        Parameters:
+                self(Enemy) : The pigeon
+            
+                
+        '''
         # Find direction vector (dx, dy) between enemy and the next step towards the player
         next_step_coords = vec(self.next_grid_step[0] * 32, self.next_grid_step[1] * 32)
 
         dirvect = vec(next_step_coords.x - self.rect.x,
                                       next_step_coords.y - self.rect.y)
+        # scale to speed to keeps speed stead
         try:
             dirvect.normalize()
             dirvect.scale_to_length(self.speed)

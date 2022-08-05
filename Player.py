@@ -3,9 +3,16 @@ from helper import *
 
 vec = pg.math.Vector2
 
+#this class implements the movable dino player character
+
 class Player(pg.sprite.Sprite):
     
-    def __init__(self, environment,wasd_or_arrow_keys) -> None:
+    def __init__(self, environment,wasd_or_arrow_keys):
+
+        """
+        Initializes a object of the player class
+
+        """
         pg.sprite.Sprite.__init__(self)
         self.environment = environment
         self.wasd_or_arrow_keys = wasd_or_arrow_keys
@@ -79,4 +86,7 @@ class Player(pg.sprite.Sprite):
         self.rect.midbottom = self.pos
         
     def get_pos(self):
+        """
+        Returns: self.pos(2D Vector): The player position on the screen
+        """
         return self.pos

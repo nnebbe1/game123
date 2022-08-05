@@ -6,11 +6,14 @@ class Platform(pg.sprite.Sprite):
     def __init__(self, grid_x ,grid_y, type):
         '''
             Initialises an object of class Platform
+            These are the platforms that the player can jump on
             
             Parameters:
                 grid_x(int), grid_y(int): it's coordinates in the grid
                 type(str): it's type (solid or not)
         '''
+
+        #leaves room for the implementation of different types of platforms
         if type == "solid":
             self.type = "solid"
             pg.sprite.Sprite.__init__(self)

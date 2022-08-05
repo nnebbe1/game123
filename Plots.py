@@ -1,3 +1,8 @@
+"""
+
+Unfortunately this class has to be commented out, because of the compatibility issues between packages
+
+
 from matplotlib import pyplot as plt
 import pandas as pd
 from helper import *
@@ -53,3 +58,5 @@ class Plot():
         self.axes[1].legend(["Your score", "Highscores"])
 
         plt.show()
+
+"""

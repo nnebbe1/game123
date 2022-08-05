@@ -141,6 +141,7 @@ class Environment:
             hits = pg.sprite.spritecollide(self.player, self.goals, False)
             if hits:
                 self.gamerunning = False
+                self.score += 2000
                 self.win_or_loose = "win"
         
     def get_pos(self):

@@ -21,6 +21,7 @@ from tkinter import ttk
 def button_click(score, butterflies, pigeons):
     '''
         Saves the user data in a csv
+        Makes use of the tkinter package
 
         Parameters:
             score(int): the user's score
@@ -34,6 +35,14 @@ def button_click(score, butterflies, pigeons):
     scoreboard_file.close()
     root.destroy()
     return
+
+def button_clicked():
+    '''
+        A function to use the button click within tkinter
+        Shorted to fit into the tkinter button parameters
+    '''
+    button_click(environment1.get_score(), environment1.get_butterflies(), environment1.get_pigeons())
+
 
 #initialising pygame
 pg.init()
@@ -101,18 +110,13 @@ while environment1.gamerunning:
     # refresh-time
     clock.tick(60)
 
-
-def button_clicked():
-    '''
-        A function to use the button click within tkinter
-    '''
-    button_click(environment1.get_score(), environment1.get_butterflies(), environment1.get_pigeons())
-
     
 #show endscreen
 end_screen(screen, environment1.win_or_loose, environment1.score)
 
-# User Interface for Name input    
+# User Interface for Name input
+#Saves name, score, butterflyscore and pigeon score in the csv
+# makes use of the tkinter package    
 
 root = Tk()
 root.wm_title("Dino's path to victory")
@@ -129,9 +133,12 @@ root.mainloop()
 pg.quit()
 
 #creating plot for user's scores
-plot1 = Plots.Plot() 
-plot1.set_scores()
-plot1.plot()
+#This is where the user score get plotted and compared with the highest scores on the scoreboard csv
+
+
+#plot1 = Plots.Plot() 
+#plot1.set_scores()
+#plot1.plot()
 
 
 
