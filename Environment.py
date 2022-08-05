@@ -11,6 +11,7 @@ import random
 import Butterfly
 import Enemy
 import Grid
+import Goal
 
 vec = pg.math.Vector2
 
@@ -28,12 +29,20 @@ class Environment:
         self.solid_platforms = pg.sprite.Group()
         self.player = Player.Player(self, wasd_or_arrow_keys)
         self.enemy = Enemy.Enemy(self.player)
+        self.goal = Goal.Goal()
+        self.goals = pg.sprite.Group()
+        self.goals.add(self.goal)
+        self.all_sprites.add(self.goal)
         self.all_sprites.add(self.player)
         self.all_sprites.add(self.enemy)
         self.all_butterflies = pg.sprite.Group()
-        self.fireballs = pg.sprite.Group()
+        self.all_enemies = pg.sprite.Group()
+        self.all_enemies.add(self.enemy)
+        self.all_fireballs = pg.sprite.Group()
         self.score = 0
         self.butterfly_score = 0
+        self.gamerunning = True
+        self.win_or_loose = None
 
         #leaves the possibility for the implementation / additon of more levels with different setup
         if level == 1:
@@ -58,7 +67,7 @@ class Environment:
         This function adds a fireball object
         """
         temp_fireball = Fireball.Fireball(self.player)
-        self.fireballs.add(temp_fireball)
+        self.all_fireballs.add(temp_fireball)
         self.all_sprites.add(temp_fireball)
 
     def update(self):
@@ -69,13 +78,21 @@ class Environment:
         """
         self.all_sprites.update()
 
-        # collision between a fireball and an enemy
-        for fireball in self.fireballs: 
-            hits = pg.sprite.spritecollide(fireball, self.enemies, True)
+        # collision between player and an enemy 
+        if self.all_enemies:
+            hits = pg.sprite.spritecollide(self.player, self.all_enemies, False)
             if hits:
-                e = Enemy.Enemy(self.player)
-                self.all_sprites.add(e)
-                self.enemies.add(e)
+                self.gamerunning = False
+                self.win_or_loose = "loose"    
+        # collision between a fireball and an enemy
+        for fireball in self.all_fireballs: 
+            hits = pg.sprite.spritecollide(fireball, self.all_enemies, True)
+            if hits:
+                print("kill!")
+                hits[0].kill()
+                new_enemy = Enemy.Enemy(self.player)
+                self.all_sprites.add(new_enemy)
+                self.all_enemies.add(new_enemy)
 
         #collision between player and a butterfly
         if self.all_butterflies:
@@ -97,7 +114,16 @@ class Environment:
             if hits:
                 self.player.pos.y += 4
                 self.player.vel.y = 0
-                                    
+        
+        if len(self.all_butterflies) == 0:
+            self.goal.rect.center = vec(WIDTH-95, 35)
+
+        if self.goals:  
+            hits = pg.sprite.spritecollide(self.player, self.goals, False)
+            if hits:
+                self.gamerunning = False
+                self.win_or_loose = "win"
+        
     def get_pos(self):
         return self.player.get_pos()
         

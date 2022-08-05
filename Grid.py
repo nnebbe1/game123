@@ -91,9 +91,6 @@ class Grid:
             self.grid[11][23] = 2
             self.grid[28][24] = 2
 
-            self.grid =  [[0 for j in range(100)] for i in range(100)]
-            for i in range(30):
-                self.grid[i][1] = 1 
         #possible second level that we did not have the time to finish
         if level == 2:
             for i in range(6):
@@ -135,23 +132,23 @@ class Grid:
         temp_list = list()
         x = int(x)
         y = int(y)
-        if self.grid[x-1][y] == 0:
-            temp_list.append((x-1,y,1))
-        if self.grid[x][y-1] == 0:
-            temp_list.append((x,y-1,1))
-        if self.grid[x][y+1] == 0:
-            temp_list.append((x,y+1,1))
-        if self.grid[x+1][y] == 0:
-            temp_list.append((x+1,y,1))
+        #if self.grid[x-1][y] == 0:
+        temp_list.append((x-1,y,1))
+        #if self.grid[x][y-1] == 0:
+        temp_list.append((x,y-1,1))
+        #if self.grid[x][y+1] == 0:
+        temp_list.append((x,y+1,1))
+       # if self.grid[x+1][y] == 0:
+        temp_list.append((x+1,y,1))
 
-        if self.grid[x+1][y+1] == 0:
-            temp_list.append((x+1,y+1,1.424))
-        if self.grid[x+1][y-1] == 0:
-            temp_list.append((x+1,y-1,1.424))
-        if self.grid[x-1][y+1] == 0:
-            temp_list.append((x-1,y+1,1.424))
-        if self.grid[x-1][y-1] == 0:
-            temp_list.append((x-1,y-1,1.424))
+        #if self.grid[x+1][y+1] == 0:
+        temp_list.append((x+1,y+1,1.424))
+        #if self.grid[x+1][y-1] == 0:
+        temp_list.append((x+1,y-1,1.424))
+        #if self.grid[x-1][y+1] == 0:
+        temp_list.append((x-1,y+1,1.424))
+        #if self.grid[x-1][y-1] == 0:
+        temp_list.append((x-1,y-1,1.424))
         return temp_list
 
             

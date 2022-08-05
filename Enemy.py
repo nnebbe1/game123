@@ -17,14 +17,14 @@ class Enemy(pg.sprite.Sprite):
         self.image = pg.image.load('data\images\pigeon_left.png')
         self.rect = self.image.get_rect()
         self.speed = 2
-        self.pos = vec(WIDTH/2 + 200, HEIGHT/2+100)
-        self.rect.center = (self.pos.x, self.pos.y )
+        self.pos = vec(random.choice([(-10,-10), (WIDTH /2, -10), (WIDTH, -10), (WIDTH/2, HEIGHT +10), (WIDTH+10, HEIGHT /2)]))
+        self.rect.center = (self.pos.x, self.pos.y)
         self.grid_pos = vec(int(self.pos.x / 32), int(self.pos.y / 32))
         self.grid = Grid.Grid(1)
         self.next_grid_step = None
     
     def update(self):
-        self.grid_pos = vec(int(self.pos.x / 32), int(self.pos.y / 32))
+        
         self.next_grid_step = A_Search(self)
         self.move_towards_player()
         #hits = pg.sprite.spritecollide(self, self.environment.all_platforms, False)
@@ -45,20 +45,23 @@ class Enemy(pg.sprite.Sprite):
         # Find direction vector (dx, dy) between enemy and the next step towards the player
         next_step_coords = vec(self.next_grid_step[0] * 32, self.next_grid_step[1] * 32)
 
-        dirvect = pg.math.Vector2(next_step_coords.x - self.rect.x,
+        dirvect = vec(next_step_coords.x - self.rect.x,
                                       next_step_coords.y - self.rect.y)
-        dirvect.normalize()
-        if dirvect.y > 0:
+        try:
+            dirvect.normalize()
+            dirvect.scale_to_length(self.speed)
+        except:
+            pass
+        #set looking direction accoring to moving direction
+        if dirvect.x < 0:
             self.image = pg.image.load('data\images\pigeon_left.png')
         else: 
             self.image = pg.image.load('data\images\pigeon_right.png')
 
         # Move along this normalized vector towards the next step at current speed.
-        dirvect.scale_to_length(self.speed)
-        self.rect.move_ip(dirvect)
-        self.pos = vec(self.rect.x, self.rect.y)            
-                
-                
+        self.pos = self.pos + vec(dirvect.x, dirvect.y) 
+        self.grid_pos = vec(int(self.pos.x / 32), int(self.pos.y / 32))       
+        self.rect.midbottom = self.pos
                 
                 
                 

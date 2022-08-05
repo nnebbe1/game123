@@ -47,7 +47,7 @@ def draw_text_on_screen(screen, text, size, color, x, y):
 def A_Search(self)->tuple:
         # get start and goal from the position of the pigeon and the positon of the player
         start_node = (self.grid_pos.x, self.grid_pos.y)
-        goal_node = (self.player.grid_pos.x, self.player.grid_pos.y)
+        goal_node = (self.player.grid_pos.x, self.player.grid_pos.y-1)
 
         #open list and closed list
         open_lst = list()
@@ -78,7 +78,10 @@ def A_Search(self)->tuple:
                 reconst_path.append(start_node)
                 reconst_path.reverse()
                 #return the first node on the path towards goal
-                return reconst_path[1]
+                try:
+                    return reconst_path[1]
+                except:
+                    return reconst_path[0]
             
             for node_with_dist in self.grid.get_neighbors_with_dist(cheapest_node[0],cheapest_node[1]):
           # if the current node is not in both open_lst and closed_lst
@@ -142,11 +145,18 @@ def start_screen(screen)->str:
                     #return None
     return wasd_or_arrow_keys
 
-def end_screen(screen, score):
-    screen.fill(LIGHTBLUE)
-    draw_text_on_screen(screen, "Oh no you died! You're score is {}".format(score) , 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.5 )
-    draw_text_on_screen(screen,  "Better Luck next time!", 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.6 )
-    pg.display.flip()
+def end_screen(screen, win_or_loose, score):
+    if win_or_loose == "loose":
+        screen.fill(LIGHTBLUE)
+        draw_text_on_screen(screen, "Oh no you died! You're score is {}".format(score) , 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.5 )
+        draw_text_on_screen(screen,  "Better Luck next time!", 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.6 )
+        pg.display.flip()
+
+    if win_or_loose == "win":
+        screen.fill(LIGHTBLUE)
+        draw_text_on_screen(screen, "You made it! You're score is {}".format(score) , 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.5 )
+        draw_text_on_screen(screen,  "GREAT JOB!", 21, BLACK, WIDTH * 0.5 , HEIGHT * 0.6 )
+        pg.display.flip()
 
 def button_click(root, entry_field):
     PLAYER_NAME = entry_field.get()

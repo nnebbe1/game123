@@ -1,4 +1,3 @@
-# Importieren der Pygame-Bibliothek
 from asyncore import write
 from lib2to3.pgen2.token import NEWLINE
 from pydoc import pipepager
@@ -54,14 +53,8 @@ wasd_or_arrow_keys = start_screen(screen)
 #create the environment
 environment1 = Environment.Environment(1, wasd_or_arrow_keys)
 
-
-
-
-#show start screen
-start_screen(screen)
-
 # Schleife Hauptprogramm
-while gameactive:
+while environment1.gamerunning:
     keys = pg.key.get_pressed()
     # Überprüfen, ob Nutzer eine Aktion durchgeführt hat
     for event in pg.event.get():
@@ -78,19 +71,7 @@ while gameactive:
             elif event.key == pg.K_SPACE:
                 environment1.player_shoot()
         elif event.type == pg.MOUSEBUTTONDOWN:
-            print("mousebutton")
-
-    #Game over condition
-   # if environment1.player.pos.y > HEIGHT +50:
-    #    for sprite in environment1.all_sprites:
-    #        sprite.rect.y -= max(environment1.player.vel.y, 10)
-    #        if sprite.rect.bottom < 0:
-    #            sprite.kill()
-    #        if len(environment1.solid_platforms) == 0:
-                #end_screen(screen, environment1.score)
-                #time.sleep(2)
-    #            gameactive = False
-                
+            print("mousebutton")   
 
     # Spielfeld löschen
     screen.fill(LIGHTBLUE)
@@ -99,7 +80,9 @@ while gameactive:
     environment1.update()
 
     environment1.all_sprites.draw(screen)
-
+    #Makes sure that the enemy is always at top layer of screen and can always be seen
+    environment1.all_enemies.draw(screen)
+    #Shows the current score
     draw_text_on_screen(screen, str(environment1.score), 20, BLACK, WIDTH * (5 / 6), 15)
 
     # Fenster aktualisieren
@@ -108,7 +91,8 @@ while gameactive:
     # Refresh-Zeiten festlegen
     clock.tick(60)
 
-    
+end_screen(screen, environment1.win_or_loose, environment1.score)
+# User Interface for Name input    
 root = Tk()
 root.wm_title("Dino's path to victory")
 lable = ttk.Label( text="Write your name to put it on the scoreboard!")
