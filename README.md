@@ -1,7 +1,7 @@
 PROJECT GOALS AND MOTIVATION
 
 The content of the folder "game123" implements a 2D Jump & Run style game
-in which you play as a dinosaur against an intelligent, evil pigeon that will hunt the player.
+in which you play as a dinosaur against an intelligent (guided search using the A star search algorithm), evil pigeon that will hunt the player. After the game, the player can compare his or her score against the scores of his predecessors that have been saved in the scoreboard.csv file and will now be plotted.
 
 The goal of the game is to collect all butterflies, evade the pigeon, or shoot it with your fireballs,
 and then reach the goal flag. The goal flag will only unlock, once you have collected all butterflies by running into them. If the evil pigeon catches the dinosaur, you loose the game. You will also get points for collecting butterflies, shooting pigeons and reaching the goal. These points will be the score.
@@ -11,12 +11,15 @@ The level consists of a 2D space with platforms on which the player can jump and
 Once the game is lost or won the user will get a dialog window that prompts to input your name. This name will then be saved - together with the scores of the player - into the scoreboard.csv
 The data in the scoreboard.csv can then (in theory) be used to plot the players scores and name against that of the highest achieved score.
 
+DISCLAIMER:
+
+Unfortunately, we had great trouble with making pygame, numpy, python and matplotlib work together. This has likely to do with the fact, that the newst pygame version is quite old and it comes with its own numpy version. In theory, after the game is finished, a plot will show up with scores. However that code that implements the plotting is commented out. You will see this in the Plot.py file and at the end of the main.py file. This way you still can expierence the game in action, just without the plots. The plotting code is still there, and since we tested in different environments, should plot accordingly.
+
 GAME INSTRUCTIONS
 
-You have to possible control schemas to control the dinosaur. Use either WASD or the arrow keys to move. You can determine the control schema, once you start the game. Either press W or ARROW UP in the start screen.
+You have to possible control schemas to control the dinosaur. Use either WASD or the arrow keys to move and jump. You can determine the control schema, once you start the game. Either press W or ARROW UP in the start screen. 
 
 Once in the game you can use SPACRE_BAR to shoot fireballs.
-
 Pick up butterflies by moving into them. Same goes for the goal flag.
 
 PROJECT STRUCTURE
