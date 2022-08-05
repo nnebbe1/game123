@@ -5,14 +5,7 @@ vec = pg.math.Vector2
 
 class Player(pg.sprite.Sprite):
     
-    def __init__(self, environment,wasd_or_arrow_keys):
-        '''
-            Initialises the Player
-
-                Parameters:
-                    environment(obj): the environment in which the player exists
-                    wasd_or_arrow_keys(str): determines how player is controlled
-        '''
+    def __init__(self, environment,wasd_or_arrow_keys) -> None:
         pg.sprite.Sprite.__init__(self)
         self.environment = environment
         self.wasd_or_arrow_keys = wasd_or_arrow_keys
@@ -24,12 +17,12 @@ class Player(pg.sprite.Sprite):
         self.grid_pos = vec(int(self.pos.x / 32), int(self.pos.y / 32))
         self.vel = vec(0,0)
         self.acc = vec(0,0)
-        self.climbing = False
 
     def jump(self):
-        '''
-            Player can jump
-        '''
+        """
+        This function implements the jumping of the player
+        """
+        #check if underneath the player is a platform, if yes, jump
         self.rect.y += 1
         hits = pg.sprite.spritecollide(self, self.environment.all_platforms, False)
         self.rect.y -= 1 
@@ -39,9 +32,10 @@ class Player(pg.sprite.Sprite):
 
 
     def update(self):
-        '''
-            Updates the player by moving it with user's input
-        '''
+        """
+        This function updates the position, velocity and acceleration of the player
+        It also checks for user input and adjusts looking direction and acceleration accordingly.
+        """
         #gravity
         self.acc = vec(0,0.2)
 
@@ -70,20 +64,19 @@ class Player(pg.sprite.Sprite):
         # motion with friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
         self.vel += self.acc
-        self.pos += self.vel + 0.5 * self.acc
+        # movement when inside the screen
+        if self.pos.x < WIDTH-16 and self.pos.x > 16: 
+            self.pos += self.vel + 0.5 * self.acc
+
+        #makes sure that the player cannot move outside of the screen
+        if self.pos.x >= WIDTH-16:
+            self.pos.x = WIDTH - 21
+        if self.pos.x <= 16:
+            self.pos.x = 22
+
+        #update gridposition and rect position accordingly
         self.grid_pos = vec(int(self.pos.x / 32), int(self.pos.y / 32))
-
-        # wrap around the screen
-        if self.pos.x > WIDTH:
-            self.pos.x = 0
-        if self.pos.x < 0:
-            self.pos.x = WIDTH
-
         self.rect.midbottom = self.pos
         
     def get_pos(self):
-        '''
-            Returns:
-                self.pos(vec): player's position
-        '''
         return self.pos

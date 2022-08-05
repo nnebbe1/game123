@@ -11,9 +11,14 @@ import random
 import Butterfly
 import Enemy
 import Grid
+import Goal
 
 vec = pg.math.Vector2
 
+# this class implements the game environment and sets it up
+# the environment manages all objects in the game (platforms, enemy, player)
+# and the interaction betweens these objects
+# the environment also manages things like key settings and score
 class Environment:
     def __init__(self, level, wasd_or_arrow_keys):
         '''
@@ -26,15 +31,21 @@ class Environment:
         self.level = level
         self.wasd_or_arrow_keys = wasd_or_arrow_keys
         self.all_sprites = pg.sprite.Group()
-        self.grid = Grid.Grid(level)
+        self.grid = Grid.Grid(1)
         self.all_platforms = pg.sprite.Group()
         self.solid_platforms = pg.sprite.Group()
-        self.not_solid_platforms = pg.sprite.Group()
         self.player = Player.Player(self, wasd_or_arrow_keys)
+        self.enemy = Enemy.Enemy(self.player)
+        self.goal = Goal.Goal()
+        self.goals = pg.sprite.Group()
+        self.goals.add(self.goal)
+        self.all_sprites.add(self.goal)
         self.all_sprites.add(self.player)
+        self.all_sprites.add(self.enemy)
         self.all_butterflies = pg.sprite.Group()
-        self.fireballs = pg.sprite.Group()
-        self.enemies = pg.sprite.Group()
+        self.all_enemies = pg.sprite.Group()
+        self.all_enemies.add(self.enemy)
+        self.all_fireballs = pg.sprite.Group()
         self.score = 0
         self.butterfly_score = 0
         self.pigeon_score = 0
@@ -42,8 +53,11 @@ class Environment:
         self.all_sprites.add(self.player)
 
         #places the platforms in the first level
+        self.gamerunning = True
+        self.win_or_loose = None
+
+        #leaves the possibility for the implementation / additon of more levels with different setup
         if level == 1:
-            print(self.grid.grid)
             for x in range(30):
                 for y in range(25):
                     if self.grid.grid[x][y] == 1:
@@ -59,60 +73,76 @@ class Environment:
                         self.all_butterflies.add(temp_butterfly)
                         self.all_sprites.add(temp_butterfly)
 
-    #the player can shoot fireballs to shoot the enemy
     def player_shoot(self):
+        """
+        This function adds a fireball object
+        """
         temp_fireball = Fireball.Fireball(self.player)
-        self.fireballs.add(temp_fireball)
+        self.all_fireballs.add(temp_fireball)
         self.all_sprites.add(temp_fireball)
 
     def update(self):
-        '''
-            Updates the Environment by updating all Sprites and checking for collisions
-
-            Returns:
-                Boolean -> determines whether or not game is over
-        '''
+        """
+        This function updates all objects in the game
+        It also manages interactions between objects (e.g. collisions)
+        and the results of these interactions 
+        """
         self.all_sprites.update()
-    
-        #checks whether any fireballs have hit the enemy - which is then eliminated
-        #the pigeon score increases for every enemy that is eliminated
-        for fireball in self.fireballs: 
-            hits = pg.sprite.spritecollide(fireball, self.enemies, True)
+
+        # collision between player and an enemy 
+        # if there is a collision the game end by setting the gamerunning var = false
+        if self.all_enemies:
+            hits = pg.sprite.spritecollide(self.player, self.all_enemies, False)
             if hits:
-                e = Enemy.Enemy(self.player)
-                self.all_sprites.add(e)
-                self.enemies.add(e)
+                self.gamerunning = False
+                self.win_or_loose = "loose"    
+
+        # collision between a fireball and an enemy
+        # if there is a collision the enemy respawns somewhere else and the pigeon score gets higher
+        for fireball in self.all_fireballs: 
+            hits = pg.sprite.spritecollide(fireball, self.all_enemies, True)
+            if hits:
+                hits[0].kill()
+                new_enemy = Enemy.Enemy(self.player)
+                self.all_sprites.add(new_enemy)
+                self.all_enemies.add(new_enemy)
                 self.pigeon_score += 1
 
-        #the player collects the butterflies
-        #this increases the overall score and the butterfly score
+        #collision between player and a butterfly
+        #if collision, picks up butterfly and increase score
         if self.all_butterflies:
             hits = pg.sprite.spritecollide(self.player, self.all_butterflies, True)
             if hits:
                 self.score += 20
                 self.butterfly_score += 1
 
-        #if the enemy hits the player the game is over    
-        if self.enemies:
-            hits = pg.sprite.spritecollide(self.player, self.enemies, True)
-            if hits:
-                return False
             
-        #check if player hits a platform - only when falling
+        #check if player hits a platform when falling, if yes, stop movement
         if self.player.vel.y > 0:
             hits = pg.sprite.spritecollide(self.player, self.solid_platforms, False)
             if hits:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
 
+        #check if player hits a platform when jumping, if yes, stop movement
         if self.player.vel.y < 0:
             hits = pg.sprite.spritecollide(self.player, self.solid_platforms, False)
             if hits:
                 self.player.pos.y += 4
                 self.player.vel.y = 0
-        
-                                    
 
+        #if all buterflies are collected, make the goals flag reachable 
+        if len(self.all_butterflies) == 0:
+            self.goal.rect.center = vec(WIDTH-95, 35)
+
+        #collision player and goal flag
+        #if collision, end game and set win_loose to win
+        if self.goals:  
+            hits = pg.sprite.spritecollide(self.player, self.goals, False)
+            if hits:
+                self.gamerunning = False
+                self.win_or_loose = "win"
+        
     def get_pos(self):
         '''
             Returns:
