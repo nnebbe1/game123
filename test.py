@@ -15,10 +15,10 @@ import csv
 
 
 
-#def A_Search(self)->tuple:
+def A_Search(self)->tuple:
         # get start and goal from the position of the pigeon and the positon of the player
         start_node = (self.grid_pos.x, self.grid_pos.y)
-        goal_node = (self.player.grid_pos.x, self.grid_pos.y)
+        goal_node = (self.player.grid_pos.x, self.player.grid_pos.y)
 
         #open list and closed list
         open_lst = list()
