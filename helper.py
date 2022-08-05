@@ -45,7 +45,7 @@ def draw_text_on_screen(screen, text, size, color, x, y):
     text_rect.midtop = (x ,y)
     screen.blit(text_surface, text_rect)
 
-def start_screen(screen):
+def start_screen(screen)->str:
     '''
         Defines the start screen
 

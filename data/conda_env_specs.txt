@@ -1,0 +1,37 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: win-64
+@EXPLICIT
+https://repo.anaconda.com/pkgs/main/win-64/blas-1.0-mkl.conda
+https://repo.anaconda.com/pkgs/main/win-64/ca-certificates-2022.07.19-haa95532_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/icc_rt-2019.0.0-h0cc432a_1.conda
+https://repo.anaconda.com/pkgs/main/win-64/intel-openmp-2022.0.0-haa95532_3663.conda
+https://repo.anaconda.com/pkgs/main/win-64/vs2015_runtime-14.27.29016-h5e58377_2.conda
+https://repo.anaconda.com/pkgs/main/win-64/mkl-2022.0.0-haa95532_115.conda
+https://repo.anaconda.com/pkgs/main/win-64/vc-14.2-h21ff451_1.conda
+https://repo.anaconda.com/pkgs/main/win-64/icu-58.2-ha925a31_3.conda
+https://repo.anaconda.com/pkgs/main/win-64/jpeg-9e-h2bbff1b_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/openssl-1.1.1q-h2bbff1b_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/python-3.5.6-he025d50_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/sqlite-3.38.5-h2bbff1b_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/zlib-1.2.12-h8cc25b3_2.conda
+https://repo.anaconda.com/pkgs/main/noarch/certifi-2020.6.20-pyhd3eb1b0_3.conda
+https://repo.anaconda.com/pkgs/main/win-64/kiwisolver-1.0.1-py35h6538335_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/libpng-1.6.37-h2a8f88b_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/numpy-1.14.2-py35h5c71026_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/pyparsing-2.4.7-pyhd3eb1b0_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/pytz-2021.3-pyhd3eb1b0_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/sip-4.19.8-py35h6538335_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/six-1.16.0-pyhd3eb1b0_1.conda
+https://repo.anaconda.com/pkgs/main/win-64/tornado-5.1.1-py35hfa6e2cd_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/wheel-0.37.1-pyhd3eb1b0_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/wincertstore-0.2-py35hfebbdb8_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/cycler-0.10.0-py35hcc71164_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/freetype-2.10.4-hd328e21_0.conda
+https://conda.anaconda.org/cogsci/win-64/pygame-1.9.2a0-py35_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/python-dateutil-2.8.2-pyhd3eb1b0_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/qt-5.9.7-vc14h73c81de_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/setuptools-40.2.0-py35_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/pip-10.0.1-py35_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/pyqt-5.9.2-py35h6538335_2.conda
+https://repo.anaconda.com/pkgs/main/win-64/matplotlib-3.0.0-py35hd159220_0.conda
