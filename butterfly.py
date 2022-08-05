@@ -15,14 +15,16 @@ class Butterfly(pg.sprite.Sprite):
         self.image = pg.image.load('data/images/Butterfly.png')
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-        self.gridposition = vec(int(grid_x), int(grid_y))
+        self_grid_pos = vec(int(grid_x), int(grid_y))
         self.rect.center = vec((HEIGHT-grid_x*32) +144, (WIDTH-grid_y*32)-160)    
     
       
     
     def update(self):
-        '''
-            A function to update the Butterfly as Sprite (no update needed)
-        '''
         pass
+        
+        
+    
+        
+        
         
